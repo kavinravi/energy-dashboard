@@ -54,8 +54,37 @@ articles.sort(key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d'), reverse=Tr
 podcasts.sort(key=lambda x: datetime.strptime(x['release_date'], '%Y-%m-%d'), reverse=True)
 
 try:
+    # Read the dashboard template file
+    dashboard_path = 'dashboard.html'
+    with open(dashboard_path, 'r') as file:
+        dashboard_content = file.read()
+    
+    # Modify the updateContent function for static site deployment
+    modified_content = dashboard_content.replace(
+        "function updateContent() {",
+        """function updateContent() {
+            alert('This is a static site. Content is updated daily via GitHub Actions. The button will redirect you to the GitHub repository.');
+            window.open('https://github.com/kavinravi/energy-dashboard', '_blank');
+            return false;
+        /* Original dynamic function:
+        function originalUpdateContent() {"""
+    ).replace(
+        """                });
+        }""", 
+        """                });
+        }
+        */"""
+    )
+    
+    # Create a temporary template file
+    with open('temp_dashboard.html', 'w') as file:
+        file.write(modified_content)
+    
+    # Set up a temporary Environment with the file system loader pointing to the current directory
+    temp_env = Environment(loader=FileSystemLoader('.'))
+    
     # Render the dashboard
-    dashboard_template = env.get_template('dashboard.html')
+    dashboard_template = temp_env.get_template('temp_dashboard.html')
     html_content = dashboard_template.render(
         articles=articles,
         podcasts=podcasts,
@@ -66,6 +95,9 @@ try:
     # Write the HTML to file
     with open('static_site/index.html', 'w') as f:
         f.write(html_content)
+    
+    # Clean up the temporary file
+    os.remove('temp_dashboard.html')
     
     print(f"Successfully generated index.html")
 
