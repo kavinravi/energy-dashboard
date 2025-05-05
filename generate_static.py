@@ -133,6 +133,7 @@ try:
         """
     
     # Replace template placeholders with actual content
+    # First replace the article loop
     content = re.sub(
         r'{% for article in articles\[:6\] %}.*?{% endfor %}',
         articles_html,
@@ -140,12 +141,17 @@ try:
         flags=re.DOTALL
     )
     
+    # Then replace the podcast loop
     content = re.sub(
         r'{% for podcast in podcasts\[:4\] %}.*?{% endfor %}',
         podcasts_html,
         content,
         flags=re.DOTALL
     )
+    
+    # Clean up any leftover template variables
+    content = re.sub(r'{{.*?}}', '', content)
+    content = re.sub(r'{%.*?%}', '', content)
     
     # Write the static HTML
     with open('static_site/index.html', 'w') as f:
