@@ -28,8 +28,22 @@ podcasts = load_data('podcasts.json')
 print(f"Loaded {len(articles)} articles and {len(podcasts)} podcasts")
 
 try:
+    # Try to read the dashboard template from different locations
+    template_path = None
+    template_paths = ['dashboard.html', 'templates/dashboard.html']
+    
+    for path in template_paths:
+        if os.path.exists(path):
+            template_path = path
+            break
+    
+    if not template_path:
+        raise FileNotFoundError("Could not find dashboard.html template in any expected location")
+        
+    print(f"Using template at: {template_path}")
+        
     # Read the dashboard template
-    with open('dashboard.html', 'r') as f:
+    with open(template_path, 'r') as f:
         content = f.read()
     
     # Replace the content
@@ -135,6 +149,10 @@ try:
     
     # Write the static HTML
     with open('static_site/index.html', 'w') as f:
+        f.write(content)
+    
+    # Also write to root index.html for immediate preview
+    with open('index.html', 'w') as f:
         f.write(content)
     
     print(f"Successfully generated index.html")

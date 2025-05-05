@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Renewable Energy Investments Reach Record High in 2025",
+    "summary": "Global investments in renewable energy reached $750 billion in 2025, marking a 15% increase from the previous year as countries race to meet climate goals.",
+    "link": "https://example.com/renewable-investments",
+    "date": "2025-05-05",
+    "source": "Energy News Today",
+    "categories": "business,climate"
+  },
+  {
+    "title": "New Policy Framework Targets Zero-Carbon Grid by 2035",
+    "summary": "Government introduces comprehensive policy package with incentives for renewables and storage to accelerate the transition to a carbon-free electricity system.",
+    "link": "https://example.com/policy-framework",
+    "date": "2025-05-03",
+    "source": "Policy Review",
+    "categories": "policy,climate"
+  },
+  {
+    "title": "Breakthrough in Long-Duration Energy Storage Technology",
+    "summary": "Researchers develop new iron-air battery technology capable of storing electricity for 100+ hours at 1/10th the cost of lithium-ion batteries.",
+    "link": "https://example.com/storage-breakthrough",
+    "date": "2025-05-01",
+    "source": "Tech Innovations",
+    "categories": "innovation,business"
+  },
+  {
+    "title": "Oil Majors Accelerate Transition to Clean Energy",
+    "summary": "Leading oil and gas companies announce plans to allocate 40% of capital expenditure to renewable energy and low-carbon technologies by 2030.",
+    "link": "https://example.com/oil-transition",
+    "date": "2025-04-29",
+    "source": "Energy Transition News",
+    "categories": "business,climate"
+  },
+  {
+    "title": "Smart Grid Deployment Reduces Outages by 45%",
+    "summary": "Implementation of AI-powered grid management system has significantly reduced outages and improved resilience during extreme weather events.",
+    "link": "https://example.com/smart-grid",
+    "date": "2025-04-27",
+    "source": "Tech Monitor",
+    "categories": "innovation,business"
+  },
+  {
+    "title": "Climate Law Enforcement Reaches New Milestone",
+    "summary": "Environmental agencies have issued record fines to companies violating emissions standards, signaling stronger enforcement of climate regulations.",
+    "link": "https://example.com/climate-enforcement",
+    "date": "2025-04-25",
+    "source": "Climate Watch",
+    "categories": "policy,climate"
+  }
+]

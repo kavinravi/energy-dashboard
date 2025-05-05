@@ -52,8 +52,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html static/ || true
-          git commit -m "Update dashboard content [automated]" || echo "No changes to commit"
+          
+          # Add all files that might have changed
+          git add index.html static/ data/*.json || true
+          
+          # Commit with a timestamp
+          git commit -m "Update dashboard content [automated] $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
           
           # Make sure we're working with the latest code
           git pull --rebase origin master

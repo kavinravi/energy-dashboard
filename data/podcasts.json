@@ -1,0 +1,26 @@
+[
+  {
+    "title": "The Future of Energy Storage: Beyond Lithium",
+    "summary": "Energy experts discuss emerging technologies that will revolutionize grid-scale storage and enable 100% renewable energy systems.",
+    "url": "https://example.com/podcast/energy-storage",
+    "release_date": "2025-05-02"
+  },
+  {
+    "title": "Policy Pathways to Net Zero: What's Working?",
+    "summary": "Analysis of the most effective policy frameworks from around the world that are successfully accelerating the energy transition.",
+    "url": "https://example.com/podcast/policy-pathways",
+    "release_date": "2025-04-25"
+  },
+  {
+    "title": "The Hydrogen Economy: Hype or Reality?",
+    "summary": "Deep dive into the technical and economic challenges of scaling hydrogen as an energy carrier for industrial decarbonization.",
+    "url": "https://example.com/podcast/hydrogen-economy",
+    "release_date": "2025-04-18"
+  },
+  {
+    "title": "Nuclear Renaissance: Small Modular Reactors",
+    "summary": "Exploring the technology, economics, and regulatory landscape of next-generation nuclear power and its role in a low-carbon future.",
+    "url": "https://example.com/podcast/nuclear-renaissance",
+    "release_date": "2025-04-11"
+  }
+]
