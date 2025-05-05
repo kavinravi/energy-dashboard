@@ -59,21 +59,20 @@ try:
     with open(dashboard_path, 'r') as file:
         dashboard_content = file.read()
     
-    # Modify the updateContent function for static site deployment
-    modified_content = dashboard_content.replace(
-        "function updateContent() {",
-        """function updateContent() {
-            alert('This is a static site. Content is updated daily via GitHub Actions. The button will redirect you to the GitHub repository.');
-            window.open('https://github.com/kavinravi/energy-dashboard', '_blank');
-            return false;
-        /* Original dynamic function:
-        function originalUpdateContent() {"""
-    ).replace(
-        """                });
-        }""", 
-        """                });
-        }
-        */"""
+    # Remove the refresh button and its container
+    modified_content = re.sub(
+        r'<button onclick="updateContent\(\)".*?</button>',
+        '',
+        dashboard_content,
+        flags=re.DOTALL
+    )
+    
+    # Remove the updateContent function
+    modified_content = re.sub(
+        r'// Update content\s+function updateContent\(\).*?}\s+}\);',
+        '});',
+        modified_content,
+        flags=re.DOTALL
     )
     
     # Create a temporary template file
