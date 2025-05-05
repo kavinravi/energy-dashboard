@@ -50,6 +50,11 @@
 
 <body class="bg-gray-50 font-sans">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Test Banner -->
+        <div class="bg-red-500 text-white p-3 rounded-lg mb-4 text-center font-bold">
+            This is a test message - Updates automatically daily, no refresh button needed
+        </div>
+        
         <!-- Header -->
         <header class="mb-10">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -63,11 +68,8 @@
                 <div class="mt-4 md:mt-0">
                     <p class="text-sm text-gray-500 flex items-center">
                         <span class="mr-2"><i class="fas fa-sync-alt"></i></span>
-                        Last updated: <span class="ml-1 font-medium">2025-05-03 21:28:31</span>
+                        Last updated: <span class="ml-1 font-medium">2025-05-05 14:08:07</span>
                     </p>
-                    <button onclick="updateContent()" class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none">
-                        <i class="fas fa-sync-alt mr-2"></i> Refresh Data
-                    </button>
                 </div>
             </div>
             
@@ -92,205 +94,58 @@
                     </h2>
                     
                     <div class="space-y-6">
+                        <!-- Placeholder for articles -->
+                        <div class="news-card p-4 rounded-lg border border-gray-100" 
+                             data-categories="policy,innovation,business,climate">
+                            <div class="flex flex-wrap gap-2 mb-2">
+                                <span class="category-badge category-policy">Policy</span>
+                                <span class="category-badge category-innovation">Innovation</span>
+                                <span class="ml-auto text-xs text-gray-500">2025-05-05</span>
+                            </div>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
+                                <a href="#" target="_blank" class="hover:text-primary-600">
+                                    Energy Dashboard Updated
+                                </a>
+                            </h3>
+                            
+                            <p class="text-gray-600 mb-3">This dashboard has been updated to simplify the interface and improve user experience.</p>
+                            
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                                    Energy Dashboard
+                                </span>
+                                <a href="#" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                    Read more <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
                         
                         <div class="news-card p-4 rounded-lg border border-gray-100" 
                              data-categories="innovation,climate">
                             <div class="flex flex-wrap gap-2 mb-2">
-                                
-                                <span class="category-badge category-innovation">
-                                    Innovation
-                                </span>
-                                
-                                <span class="category-badge category-climate">
-                                    Climate
-                                </span>
-                                
-                                <span class="ml-auto text-xs text-gray-500">2025-05-03</span>
+                                <span class="category-badge category-innovation">Innovation</span>
+                                <span class="category-badge category-climate">Climate</span>
+                                <span class="ml-auto text-xs text-gray-500">2025-05-04</span>
                             </div>
                             
                             <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://www.eventbrite.com/e/canary-live-washington-dc-tickets-1270654504829?aff=oddtdtcreator" target="_blank" class="hover:text-primary-600">
-                                    Canary Live Washington D.C.
+                                <a href="#" target="_blank" class="hover:text-primary-600">
+                                    Renewable Energy Growth Continues
                                 </a>
                             </h3>
                             
-                            <p class="text-gray-600 mb-3">Thank you to our Signature Sponsor: Advanced Energy United And our Supporting Sponsor: Echo Communications Advisors 6:15pm–7:30pm Power moves: What's next for the U.S. energy transition? 8:15pm–9:15pm Clean energy trends and storylines: A journalist panel The U.S. clean energy sector is at a crossroads. Justin Worland is a senior correspondent at TIME covering energy and climate change. In 2022, Worland was named the inaugural Climate Journalist of the Year by Covering Climate Now for his coverage of complex climate issues.</p>
+                            <p class="text-gray-600 mb-3">Renewable energy sources continue to see unprecedented growth in global installations and investments.</p>
                             
                             <div class="flex items-center justify-between">
                                 <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                    Canary Media
+                                    Energy News
                                 </span>
-                                <a href="https://www.eventbrite.com/e/canary-live-washington-dc-tickets-1270654504829?aff=oddtdtcreator" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                <a href="#" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
                                     Read more <i class="fas fa-arrow-right ml-1"></i>
                                 </a>
                             </div>
                         </div>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100" 
-                             data-categories="policy,innovation">
-                            <div class="flex flex-wrap gap-2 mb-2">
-                                
-                                <span class="category-badge category-policy">
-                                    Policy
-                                </span>
-                                
-                                <span class="category-badge category-innovation">
-                                    Innovation
-                                </span>
-                                
-                                <span class="ml-auto text-xs text-gray-500">2025-05-03</span>
-                            </div>
-                            
-                            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://www.cea3.com/cea-blog/pv-supply-technology-and-policy-report-q1-2025?utm_campaign=11741300-2025%20Canary%20Content%20Promo%20-%20Q1%2025%20PV%20STPR&utm_source=Q1%2025%20PV%20STPR&utm_medium=Canary" target="_blank" class="hover:text-primary-600">
-                                    Navigating the Shifting Solar Landscape: Supply, Technology, and Policy Insights for 2025
-                                </a>
-                            </h3>
-                            
-                            <p class="text-gray-600 mb-3">Action is the latest in six months of efforts to address the supply-demand imbalance Download the free report sample of CEA’s PV Supply, Technology, and Policy Report (STPR) for Q1 2025 by completing the form on the right. The PV Supply, Technology, and Policy Report (STPR) is published on a quarterly basis and covers global and regional supply chain analysis, technology trends, and regional policy analysis. Given the breadth of technological developments in PV, there will be a new technology focus each quarter.</p>
-                            
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                    Canary Media
-                                </span>
-                                <a href="https://www.cea3.com/cea-blog/pv-supply-technology-and-policy-report-q1-2025?utm_campaign=11741300-2025%20Canary%20Content%20Promo%20-%20Q1%2025%20PV%20STPR&utm_source=Q1%2025%20PV%20STPR&utm_medium=Canary" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100" 
-                             data-categories="innovation,business">
-                            <div class="flex flex-wrap gap-2 mb-2">
-                                
-                                <span class="category-badge category-innovation">
-                                    Innovation
-                                </span>
-                                
-                                <span class="category-badge category-business">
-                                    Business
-                                </span>
-                                
-                                <span class="ml-auto text-xs text-gray-500">2025-05-03</span>
-                            </div>
-                            
-                            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://energy.canarymedia.com/raptor-maps-global-solar-report" target="_blank" class="hover:text-primary-600">
-                                    Benchmarking solar's performance gap: Insights from 193GW of analysis
-                                </a>
-                            </h3>
-                            
-                            <p class="text-gray-600 mb-3"></p>
-                            
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                    Canary Media
-                                </span>
-                                <a href="https://energy.canarymedia.com/raptor-maps-global-solar-report" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100" 
-                             data-categories="innovation">
-                            <div class="flex flex-wrap gap-2 mb-2">
-                                
-                                <span class="category-badge category-innovation">
-                                    Innovation
-                                </span>
-                                
-                                <span class="ml-auto text-xs text-gray-500">2025-05-03</span>
-                            </div>
-                            
-                            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://energy.canarymedia.com/uplight-data-centers" target="_blank" class="hover:text-primary-600">
-                                    From Grid Challenge to Grid Asset: Data Center Load Flexibility
-                                </a>
-                            </h3>
-                            
-                            <p class="text-gray-600 mb-3"></p>
-                            
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                    Canary Media
-                                </span>
-                                <a href="https://energy.canarymedia.com/uplight-data-centers" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100" 
-                             data-categories="innovation,business">
-                            <div class="flex flex-wrap gap-2 mb-2">
-                                
-                                <span class="category-badge category-innovation">
-                                    Innovation
-                                </span>
-                                
-                                <span class="category-badge category-business">
-                                    Business
-                                </span>
-                                
-                                <span class="ml-auto text-xs text-gray-500">2025-05-03</span>
-                            </div>
-                            
-                            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://www.canarymedia.com/articles/heat-pumps/how-closing-the-spark-gap-can-boost-heat-pump-adoption" target="_blank" class="hover:text-primary-600">
-                                    3
-
-How closing the ​‘spark gap’ can boost heat pump adoption
-                                </a>
-                            </h3>
-                            
-                            <p class="text-gray-600 mb-3"></p>
-                            
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                    Canary Media
-                                </span>
-                                <a href="https://www.canarymedia.com/articles/heat-pumps/how-closing-the-spark-gap-can-boost-heat-pump-adoption" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100" 
-                             data-categories="innovation,business">
-                            <div class="flex flex-wrap gap-2 mb-2">
-                                
-                                <span class="category-badge category-innovation">
-                                    Innovation
-                                </span>
-                                
-                                <span class="category-badge category-business">
-                                    Business
-                                </span>
-                                
-                                <span class="ml-auto text-xs text-gray-500">2025-05-03</span>
-                            </div>
-                            
-                            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://www.canarymedia.com/articles/solar/florida-is-now-a-solar-superpower-heres-how-it-happened" target="_blank" class="hover:text-primary-600">
-                                    4
-
-Florida is now a solar superpower. Here’s how it happened.
-                                </a>
-                            </h3>
-                            
-                            <p class="text-gray-600 mb-3"></p>
-                            
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                    Canary Media
-                                </span>
-                                <a href="https://www.canarymedia.com/articles/solar/florida-is-now-a-solar-superpower-heres-how-it-happened" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
             </section>
@@ -304,7 +159,7 @@ Florida is now a solar superpower. Here’s how it happened.
                     </h2>
                     
                     <div class="space-y-5">
-                        
+                        <!-- Placeholder for podcasts -->
                         <div class="news-card p-4 rounded-lg border border-gray-100">
                             <div class="mb-2 flex justify-between items-center">
                                 <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
@@ -314,14 +169,14 @@ Florida is now a solar superpower. Here’s how it happened.
                             </div>
                             
                             <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://open.spotify.com/episode/54DoPGiuimgtgb4rFwi6XO" target="_blank" class="hover:text-primary-600">
-                                    Catalyst Live at SF Climate Week
+                                <a href="#" target="_blank" class="hover:text-primary-600">
+                                    Energy Transition Discussion
                                 </a>
                             </h3>
                             
-                            <p class="text-sm text-gray-600 mb-3">It’s a Catalyst first-of-a-kind: our very first live event! We hosted it last Wednesday at San Francisco Climate week. Catalyst is brought to you by EnergyHub. EnergyHub helps utilities build next-generation virtual power plants that unlock reliable flexibility at every level of the grid.</p>
+                            <p class="text-sm text-gray-600 mb-3">Experts discuss the latest developments in energy transition and policy implications.</p>
                             
-                            <a href="https://open.spotify.com/episode/54DoPGiuimgtgb4rFwi6XO" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
+                            <a href="#" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
                                 <i class="fas fa-play mr-1"></i> Listen
                             </a>
                         </div>
@@ -335,60 +190,17 @@ Florida is now a solar superpower. Here’s how it happened.
                             </div>
                             
                             <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://open.spotify.com/episode/78QoXmBKABeMlB6Gp1JHDJ" target="_blank" class="hover:text-primary-600">
-                                    The geopolitics of rare earth elements
+                                <a href="#" target="_blank" class="hover:text-primary-600">
+                                    Innovation in Energy Storage
                                 </a>
                             </h3>
                             
-                            <p class="text-sm text-gray-600 mb-3">The vast majority of the global supply chain is in China. Plus, Chinese companies control supply chain operations around the world. So is it possible to stand up a rare earth supply chain outside of China’s control? The Minerals Are China’s.</p>
+                            <p class="text-sm text-gray-600 mb-3">A deep dive into breakthrough technologies for energy storage and grid stability.</p>
                             
-                            <a href="https://open.spotify.com/episode/78QoXmBKABeMlB6Gp1JHDJ" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
+                            <a href="#" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
                                 <i class="fas fa-play mr-1"></i> Listen
                             </a>
                         </div>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100">
-                            <div class="mb-2 flex justify-between items-center">
-                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                                    Podcast
-                                </span>
-                                <span class="text-xs text-gray-500">2025-04-23</span>
-                            </div>
-                            
-                            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://open.spotify.com/episode/62iwX71Qmkb17jF19vt7eb" target="_blank" class="hover:text-primary-600">
-                                    What’s next for the battery storage boom? [partner content]
-                                </a>
-                            </h3>
-                            
-                            <p class="text-sm text-gray-600 mb-3">The U.S. storage market is experiencing hockey-stick growth, with multiple gigawatts being installed quarterly. "The only way we're going to get anywhere in the U.S. market with storage is by partnering with the Chinese." Powin is pushing the frontiers of energy storage. To learn more about Powin's integrated energy storage systems and to read case studies of how the company is executing projects, go to powin.com.</p>
-                            
-                            <a href="https://open.spotify.com/episode/62iwX71Qmkb17jF19vt7eb" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                                <i class="fas fa-play mr-1"></i> Listen
-                            </a>
-                        </div>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100">
-                            <div class="mb-2 flex justify-between items-center">
-                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                                    Podcast
-                                </span>
-                                <span class="text-xs text-gray-500">2025-04-17</span>
-                            </div>
-                            
-                            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="https://open.spotify.com/episode/2wI8d2gEasQtHikZWaWtmT" target="_blank" class="hover:text-primary-600">
-                                    Serving data center load with carbon capture
-                                </a>
-                            </h3>
-                            
-                            <p class="text-sm text-gray-600 mb-3">Big tech’s data center construction boom is fueling a flurry of natural gas development, despite the fuel’s challenges, and it’s complicating big tech’s climate goals. But carbon capture and storage (CCS) could mitigate emissions from those new plants, and hyperscalers could secure low-carbon power while meeting their needs for speed and reliability. So how could natural gas with CCS serve data center loads? Recommended resources:    Carbon Direct: Carbon Capture for Natural Gas-Fired Power Generation  Carbon Direct: Carbon capture for natural gas-fired power generation: An opportunity for hyperscalers  Latitude Media: Where does gas fit in the puzzle of powering AI?</p>
-                            
-                            <a href="https://open.spotify.com/episode/2wI8d2gEasQtHikZWaWtmT" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                                <i class="fas fa-play mr-1"></i> Listen
-                            </a>
-                        </div>
-                        
                     </div>
                 </div>
                 
@@ -455,31 +267,6 @@ Florida is now a solar superpower. Here’s how it happened.
                 });
             });
         });
-        
-        // Update content
-        function updateContent() {
-            const button = event.target.closest('button');
-            button.disabled = true;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Updating...';
-            
-            fetch('/api/update')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        location.reload();
-                    } else {
-                        alert('Error updating content: ' + data.message);
-                        button.disabled = false;
-                        button.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Data';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error updating content');
-                    button.disabled = false;
-                    button.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Data';
-                });
-        }
     </script>
 </body>
 </html> 
