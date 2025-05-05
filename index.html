@@ -63,7 +63,7 @@
                 <div class="mt-4 md:mt-0">
                     <p class="text-sm text-gray-500 flex items-center">
                         <span class="mr-2"><i class="fas fa-sync-alt"></i></span>
-                        Last updated: <span class="ml-1 font-medium">2025-05-05 14:59:29</span>
+                        Last updated: <span class="ml-1 font-medium">2025-05-05 15:32:54</span>
                     </p>
                 </div>
             </div>
@@ -79,9 +79,9 @@
         </header>
 
         <!-- Main Content -->
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Today's Highlights -->
-            <section class="lg:col-span-2">
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Articles and Podcasts in mixed layout -->
+            <section class="lg:col-span-8">
                 <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
                     <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
                         <span class="text-energy-blue mr-2"><i class="fas fa-newspaper"></i></span>
@@ -89,205 +89,218 @@
                     </h2>
                     
                     <div class="space-y-6">
+                        <!-- Articles with mixed podcasts -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- First column (articles) -->
+                            <div class="space-y-4">
+                                
+                                <div class="news-card p-4 rounded-lg border border-gray-100" 
+                                     data-categories="">
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        
+                                        <span class="category-badge category-">
+                                            
+                                        </span>
+                                        
+                                        <span class="ml-auto text-xs text-gray-500"></span>
+                                    </div>
+                                    
+                                    <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
+                                        <a href="" target="_blank" class="hover:text-primary-600">
+                                            
+                                        </a>
+                                    </h3>
+                                    
+                                    <p class="text-gray-600 mb-3"></p>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                                            
+                                        </span>
+                                        <a href="" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                            Read more <i class="fas fa-arrow-right ml-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <!-- Second column (mix of podcasts and articles) -->
+                            <div class="space-y-4">
+                                <!-- First two podcasts -->
+                                
+                                <div class="news-card p-4 rounded-lg border border-gray-100">
+                                    <div class="mb-2 flex justify-between items-center">
+                                        <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                                            Podcast
+                                        </span>
+                                        <span class="text-xs text-gray-500"></span>
+                                    </div>
+                                    
+                                    <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
+                                        <a href="" target="_blank" class="hover:text-primary-600">
+                                            
+                                        </a>
+                                    </h3>
+                                    
+                                    <p class="text-sm text-gray-600 mb-3"></p>
+                                    
+                                    <a href="" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
+                                        <i class="fas fa-play mr-1"></i> Listen
+                                    </a>
+                                </div>
+                                
+                                
+                                <!-- One more article -->
+                                
+                                <div class="news-card p-4 rounded-lg border border-gray-100" 
+                                     data-categories="">
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        
+                                        <span class="category-badge category-">
+                                            
+                                        </span>
+                                        
+                                        <span class="ml-auto text-xs text-gray-500"></span>
+                                    </div>
+                                    
+                                    <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
+                                        <a href="" target="_blank" class="hover:text-primary-600">
+                                            
+                                        </a>
+                                    </h3>
+                                    
+                                    <p class="text-gray-600 mb-3"></p>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                                            
+                                        </span>
+                                        <a href="" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                            Read more <i class="fas fa-arrow-right ml-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
                         
-        <div class="news-card p-4 rounded-lg border border-gray-100" 
-             data-categories="business,climate">
-            <div class="flex flex-wrap gap-2 mb-2">
-                
-            <span class="category-badge category-business">
-                Business
-            </span>
+                        <!-- Additional row -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <!-- Third column (remaining articles) -->
+                            <div>
+                                
+                                <div class="news-card p-4 rounded-lg border border-gray-100" 
+                                     data-categories="">
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        
+                                        <span class="category-badge category-">
+                                            
+                                        </span>
+                                        
+                                        <span class="ml-auto text-xs text-gray-500"></span>
+                                    </div>
+                                    
+                                    <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
+                                        <a href="" target="_blank" class="hover:text-primary-600">
+                                            
+                                        </a>
+                                    </h3>
+                                    
+                                    <p class="text-gray-600 mb-3"></p>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                                            
+                                        </span>
+                                        <a href="" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                            Read more <i class="fas fa-arrow-right ml-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <!-- Fourth column (remaining podcasts) -->
+                            <div>
+                                
+                                <div class="news-card p-4 rounded-lg border border-gray-100">
+                                    <div class="mb-2 flex justify-between items-center">
+                                        <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                                            Podcast
+                                        </span>
+                                        <span class="text-xs text-gray-500"></span>
+                                    </div>
+                                    
+                                    <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
+                                        <a href="" target="_blank" class="hover:text-primary-600">
+                                            
+                                        </a>
+                                    </h3>
+                                    
+                                    <p class="text-sm text-gray-600 mb-3"></p>
+                                    
+                                    <a href="" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
+                                        <i class="fas fa-play mr-1"></i> Listen
+                                    </a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
-            <span class="category-badge category-climate">
-                Climate
-            </span>
-            
-                <span class="ml-auto text-xs text-gray-500">2025-05-05</span>
-            </div>
-            
-            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/renewable-investments" target="_blank" class="hover:text-primary-600">
-                    Renewable Energy Investments Reach Record High in 2025
-                </a>
-            </h3>
-            
-            <p class="text-gray-600 mb-3">Global investments in renewable energy reached $750 billion in 2025, marking a 15% increase from the previous year as countries race to meet climate goals.</p>
-            
-            <div class="flex items-center justify-between">
-                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                    Energy News Today
-                </span>
-                <a href="https://example.com/renewable-investments" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="news-card p-4 rounded-lg border border-gray-100" 
-             data-categories="policy,climate">
-            <div class="flex flex-wrap gap-2 mb-2">
-                
-            <span class="category-badge category-policy">
-                Policy
-            </span>
-            
-            <span class="category-badge category-climate">
-                Climate
-            </span>
-            
-                <span class="ml-auto text-xs text-gray-500">2025-05-03</span>
-            </div>
-            
-            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/policy-framework" target="_blank" class="hover:text-primary-600">
-                    New Policy Framework Targets Zero-Carbon Grid by 2035
-                </a>
-            </h3>
-            
-            <p class="text-gray-600 mb-3">Government introduces comprehensive policy package with incentives for renewables and storage to accelerate the transition to a carbon-free electricity system.</p>
-            
-            <div class="flex items-center justify-between">
-                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                    Policy Review
-                </span>
-                <a href="https://example.com/policy-framework" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="news-card p-4 rounded-lg border border-gray-100" 
-             data-categories="innovation,business">
-            <div class="flex flex-wrap gap-2 mb-2">
-                
-            <span class="category-badge category-innovation">
-                Innovation
-            </span>
-            
-            <span class="category-badge category-business">
-                Business
-            </span>
-            
-                <span class="ml-auto text-xs text-gray-500">2025-05-01</span>
-            </div>
-            
-            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/storage-breakthrough" target="_blank" class="hover:text-primary-600">
-                    Breakthrough in Long-Duration Energy Storage Technology
-                </a>
-            </h3>
-            
-            <p class="text-gray-600 mb-3">Researchers develop new iron-air battery technology capable of storing electricity for 100+ hours at 1/10th the cost of lithium-ion batteries.</p>
-            
-            <div class="flex items-center justify-between">
-                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                    Tech Innovations
-                </span>
-                <a href="https://example.com/storage-breakthrough" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="news-card p-4 rounded-lg border border-gray-100" 
-             data-categories="business,climate">
-            <div class="flex flex-wrap gap-2 mb-2">
-                
-            <span class="category-badge category-business">
-                Business
-            </span>
-            
-            <span class="category-badge category-climate">
-                Climate
-            </span>
-            
-                <span class="ml-auto text-xs text-gray-500">2025-04-29</span>
-            </div>
-            
-            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/oil-transition" target="_blank" class="hover:text-primary-600">
-                    Oil Majors Accelerate Transition to Clean Energy
-                </a>
-            </h3>
-            
-            <p class="text-gray-600 mb-3">Leading oil and gas companies announce plans to allocate 40% of capital expenditure to renewable energy and low-carbon technologies by 2030.</p>
-            
-            <div class="flex items-center justify-between">
-                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                    Energy Transition News
-                </span>
-                <a href="https://example.com/oil-transition" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="news-card p-4 rounded-lg border border-gray-100" 
-             data-categories="innovation,business">
-            <div class="flex flex-wrap gap-2 mb-2">
-                
-            <span class="category-badge category-innovation">
-                Innovation
-            </span>
-            
-            <span class="category-badge category-business">
-                Business
-            </span>
-            
-                <span class="ml-auto text-xs text-gray-500">2025-04-27</span>
-            </div>
-            
-            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/smart-grid" target="_blank" class="hover:text-primary-600">
-                    Smart Grid Deployment Reduces Outages by 45%
-                </a>
-            </h3>
-            
-            <p class="text-gray-600 mb-3">Implementation of AI-powered grid management system has significantly reduced outages and improved resilience during extreme weather events.</p>
-            
-            <div class="flex items-center justify-between">
-                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                    Tech Monitor
-                </span>
-                <a href="https://example.com/smart-grid" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="news-card p-4 rounded-lg border border-gray-100" 
-             data-categories="policy,climate">
-            <div class="flex flex-wrap gap-2 mb-2">
-                
-            <span class="category-badge category-policy">
-                Policy
-            </span>
-            
-            <span class="category-badge category-climate">
-                Climate
-            </span>
-            
-                <span class="ml-auto text-xs text-gray-500">2025-04-25</span>
-            </div>
-            
-            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/climate-enforcement" target="_blank" class="hover:text-primary-600">
-                    Climate Law Enforcement Reaches New Milestone
-                </a>
-            </h3>
-            
-            <p class="text-gray-600 mb-3">Environmental agencies have issued record fines to companies violating emissions standards, signaling stronger enforcement of climate regulations.</p>
-            
-            <div class="flex items-center justify-between">
-                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                    Climate Watch
-                </span>
-                <a href="https://example.com/climate-enforcement" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-        
+            <!-- Sidebar with trends and final podcast -->
+            <section class="lg:col-span-4">
+                <div class="space-y-6">
+                    <!-- Final podcast -->
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                            <span class="text-energy-yellow mr-2"><i class="fas fa-podcast"></i></span>
+                            Featured Podcast
+                        </h2>
+                        
+                        <div class="news-card p-4 rounded-lg border border-gray-100">
+                            <div class="mb-2 flex justify-between items-center">
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                                    Podcast
+                                </span>
+                                <span class="text-xs text-gray-500"></span>
+                            </div>
+                            
+                            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
+                                <a href="" target="_blank" class="hover:text-primary-600">
+                                    
+                                </a>
+                            </h3>
+                            
+                            <p class="text-sm text-gray-600 mb-3"></p>
+                            
+                            <a href="" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
+                                <i class="fas fa-play mr-1"></i> Listen
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Last article -->
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                            <span class="text-energy-blue mr-2"><i class="fas fa-newspaper"></i></span>
+                            Policy Update
+                        </h2>
+                        
+                        <div class="news-card p-4 rounded-lg border border-gray-100" 
+                             data-categories="">
+                            <div class="flex flex-wrap gap-2 mb-2">
+                                
+                                <span class="category-badge category-">
+                                    
+                                </span>
+                                
                                 <span class="ml-auto text-xs text-gray-500"></span>
                             </div>
                             
@@ -308,133 +321,35 @@
                                 </a>
                             </div>
                         </div>
-                        
                     </div>
-                </div>
-            </section>
-            
-            <!-- Podcast Insights -->
-            <section class="lg:col-span-1">
-                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
-                        <span class="text-energy-yellow mr-2"><i class="fas fa-podcast"></i></span>
-                        Expert Analysis
-                    </h2>
                     
-                    <div class="space-y-5">
+                    
+                    <!-- Market Trends Box -->
+                    <div class="bg-gradient-to-r from-primary-600 to-primary-800 rounded-xl shadow-sm p-6 text-white">
+                        <h2 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="mr-2"><i class="fas fa-chart-line"></i></span>
+                            Energy Sector Trends
+                        </h2>
                         
-        <div class="news-card p-4 rounded-lg border border-gray-100">
-            <div class="mb-2 flex justify-between items-center">
-                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                    Podcast
-                </span>
-                <span class="text-xs text-gray-500">2025-05-02</span>
-            </div>
-            
-            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/podcast/energy-storage" target="_blank" class="hover:text-primary-600">
-                    The Future of Energy Storage: Beyond Lithium
-                </a>
-            </h3>
-            
-            <p class="text-sm text-gray-600 mb-3">Energy experts discuss emerging technologies that will revolutionize grid-scale storage and enable 100% renewable energy systems.</p>
-            
-            <a href="https://example.com/podcast/energy-storage" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                <i class="fas fa-play mr-1"></i> Listen
-            </a>
-        </div>
-        
-        <div class="news-card p-4 rounded-lg border border-gray-100">
-            <div class="mb-2 flex justify-between items-center">
-                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                    Podcast
-                </span>
-                <span class="text-xs text-gray-500">2025-04-25</span>
-            </div>
-            
-            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/podcast/policy-pathways" target="_blank" class="hover:text-primary-600">
-                    Policy Pathways to Net Zero: What's Working?
-                </a>
-            </h3>
-            
-            <p class="text-sm text-gray-600 mb-3">Analysis of the most effective policy frameworks from around the world that are successfully accelerating the energy transition.</p>
-            
-            <a href="https://example.com/podcast/policy-pathways" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                <i class="fas fa-play mr-1"></i> Listen
-            </a>
-        </div>
-        
-        <div class="news-card p-4 rounded-lg border border-gray-100">
-            <div class="mb-2 flex justify-between items-center">
-                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                    Podcast
-                </span>
-                <span class="text-xs text-gray-500">2025-04-18</span>
-            </div>
-            
-            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/podcast/hydrogen-economy" target="_blank" class="hover:text-primary-600">
-                    The Hydrogen Economy: Hype or Reality?
-                </a>
-            </h3>
-            
-            <p class="text-sm text-gray-600 mb-3">Deep dive into the technical and economic challenges of scaling hydrogen as an energy carrier for industrial decarbonization.</p>
-            
-            <a href="https://example.com/podcast/hydrogen-economy" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                <i class="fas fa-play mr-1"></i> Listen
-            </a>
-        </div>
-        
-        <div class="news-card p-4 rounded-lg border border-gray-100">
-            <div class="mb-2 flex justify-between items-center">
-                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                    Podcast
-                </span>
-                <span class="text-xs text-gray-500">2025-04-11</span>
-            </div>
-            
-            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                <a href="https://example.com/podcast/nuclear-renaissance" target="_blank" class="hover:text-primary-600">
-                    Nuclear Renaissance: Small Modular Reactors
-                </a>
-            </h3>
-            
-            <p class="text-sm text-gray-600 mb-3">Exploring the technology, economics, and regulatory landscape of next-generation nuclear power and its role in a low-carbon future.</p>
-            
-            <a href="https://example.com/podcast/nuclear-renaissance" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                <i class="fas fa-play mr-1"></i> Listen
-            </a>
-        </div>
-        
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-energy-green mr-2"><i class="fas fa-arrow-up"></i></span>
+                                <span>Renewable energy investments continue to grow globally</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-energy-yellow mr-2"><i class="fas fa-bolt"></i></span>
+                                <span>Battery storage technologies seeing rapid advancements</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-energy-blue mr-2"><i class="fas fa-sun"></i></span>
+                                <span>Solar costs dropped 89% in the last decade</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-energy-red mr-2"><i class="fas fa-arrow-down"></i></span>
+                                <span>Fossil fuel projects facing increased scrutiny</span>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                
-                <!-- Market Trends Box -->
-                <div class="bg-gradient-to-r from-primary-600 to-primary-800 rounded-xl shadow-sm p-6 text-white">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center">
-                        <span class="mr-2"><i class="fas fa-chart-line"></i></span>
-                        Energy Sector Trends
-                    </h2>
-                    
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <span class="text-energy-green mr-2"><i class="fas fa-arrow-up"></i></span>
-                            <span>Renewable energy investments continue to grow globally</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-energy-yellow mr-2"><i class="fas fa-bolt"></i></span>
-                            <span>Battery storage technologies seeing rapid advancements</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-energy-blue mr-2"><i class="fas fa-sun"></i></span>
-                            <span>Solar costs dropped 89% in the last decade</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-energy-red mr-2"><i class="fas fa-arrow-down"></i></span>
-                            <span>Fossil fuel projects facing increased scrutiny</span>
-                        </li>
-                    </ul>
                 </div>
             </section>
         </main>
