@@ -65,9 +65,6 @@
                         <span class="mr-2"><i class="fas fa-sync-alt"></i></span>
                         Last updated: <span class="ml-1 font-medium">{{ last_updated }}</span>
                     </p>
-                    <button onclick="updateContent()" class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none">
-                        <i class="fas fa-sync-alt mr-2"></i> Refresh Data
-                    </button>
                 </div>
             </div>
             
@@ -223,31 +220,6 @@
                 });
             });
         });
-        
-        // Update content
-        function updateContent() {
-            const button = event.target.closest('button');
-            button.disabled = true;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Updating...';
-            
-            fetch('/api/update')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        location.reload();
-                    } else {
-                        alert('Error updating content: ' + data.message);
-                        button.disabled = false;
-                        button.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Data';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error updating content');
-                    button.disabled = false;
-                    button.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Data';
-                });
-        }
     </script>
 </body>
 </html> 
