@@ -62,4 +62,12 @@ You can manually trigger an update:
 - Spotipy: Spotify API client
 - Transformers: AI text summarization
 - Schedule: Daily updates
-- Python-dotenv: Environment variable management 
+- Python-dotenv: Environment variable management
+
+## Author
+
+Maintained by Kavin Ravi.
+
+## Last Updated
+
+Last updated on May 5, 2025. 
