@@ -7,7 +7,10 @@ import os
 import json
 import re
 from datetime import datetime
-from jinja2 import Environment, FileSystemLoader
+import shutil
+
+# Create static output directory
+os.makedirs('static_site', exist_ok=True)
 
 # Load article data
 def load_data(filename):
@@ -18,103 +21,131 @@ def load_data(filename):
         print(f"Warning: Could not load {filename}, using empty list")
         return []
 
-# Create static output directory
-os.makedirs('static_site', exist_ok=True)
-
-# Load templates
-env = Environment(loader=FileSystemLoader('templates'))
-
-# Add split filter to Jinja env
-def split_filter(value, delimiter=','):
-    """Split a string into a list on the given delimiter"""
-    if not value:
-        return []
-    return value.split(delimiter)
-
-env.filters['split'] = split_filter
-
 # Load data
 articles = load_data('articles.json')
 podcasts = load_data('podcasts.json')
 
 print(f"Loaded {len(articles)} articles and {len(podcasts)} podcasts")
 
-# Process articles to ensure they have categories
-def categorize_article(article):
-    """Ensure article has categories field"""
-    if 'categories' not in article or not article['categories']:
-        # Default categories
-        article['categories'] = 'innovation,business'
-    return article
-
-articles = [categorize_article(article) for article in articles]
-
-# Sort content by date
-articles.sort(key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d'), reverse=True)
-podcasts.sort(key=lambda x: datetime.strptime(x['release_date'], '%Y-%m-%d'), reverse=True)
-
 try:
-    # Read the dashboard template file
-    dashboard_path = 'dashboard.html'
-    with open(dashboard_path, 'r') as file:
-        dashboard_content = file.read()
+    # Read the dashboard template
+    with open('dashboard.html', 'r') as f:
+        content = f.read()
     
-    # Remove the refresh button and its container
-    modified_content = re.sub(
-        r'<button onclick="updateContent\(\)".*?</button>',
-        '',
-        dashboard_content,
+    # Replace the content
+    content = content.replace('{{ last_updated }}', datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    content = content.replace('{{ now.year }}', str(datetime.now().year))
+    
+    # Generate a simple version of the dashboard with articles/podcasts
+    articles_html = ""
+    for article in articles[:6]:
+        title = article.get('title', 'Untitled')
+        summary = article.get('summary', '')
+        link = article.get('link', '#')
+        date = article.get('date', '')
+        source = article.get('source', '')
+        categories = article.get('categories', 'innovation,business')
+        
+        # Build category badges
+        category_badges = ""
+        for category in categories.split(','):
+            category_name = {
+                'policy': 'Policy', 
+                'innovation': 'Innovation', 
+                'business': 'Business', 
+                'climate': 'Climate'
+            }.get(category, category)
+            category_badges += f"""
+            <span class="category-badge category-{category}">
+                {category_name}
+            </span>
+            """
+        
+        articles_html += f"""
+        <div class="news-card p-4 rounded-lg border border-gray-100" 
+             data-categories="{categories}">
+            <div class="flex flex-wrap gap-2 mb-2">
+                {category_badges}
+                <span class="ml-auto text-xs text-gray-500">{date}</span>
+            </div>
+            
+            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
+                <a href="{link}" target="_blank" class="hover:text-primary-600">
+                    {title}
+                </a>
+            </h3>
+            
+            <p class="text-gray-600 mb-3">{summary}</p>
+            
+            <div class="flex items-center justify-between">
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                    {source}
+                </span>
+                <a href="{link}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                    Read more <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+        """
+    
+    podcasts_html = ""
+    for podcast in podcasts[:4]:
+        title = podcast.get('title', 'Untitled')
+        summary = podcast.get('summary', '')
+        url = podcast.get('url', '#')
+        release_date = podcast.get('release_date', '')
+        
+        podcasts_html += f"""
+        <div class="news-card p-4 rounded-lg border border-gray-100">
+            <div class="mb-2 flex justify-between items-center">
+                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                    Podcast
+                </span>
+                <span class="text-xs text-gray-500">{release_date}</span>
+            </div>
+            
+            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
+                <a href="{url}" target="_blank" class="hover:text-primary-600">
+                    {title}
+                </a>
+            </h3>
+            
+            <p class="text-sm text-gray-600 mb-3">{summary}</p>
+            
+            <a href="{url}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
+                <i class="fas fa-play mr-1"></i> Listen
+            </a>
+        </div>
+        """
+    
+    # Replace template placeholders with actual content
+    content = re.sub(
+        r'{% for article in articles\[:6\] %}.*?{% endfor %}',
+        articles_html,
+        content,
         flags=re.DOTALL
     )
     
-    # Remove the updateContent function
-    modified_content = re.sub(
-        r'// Update content\s+function updateContent\(\).*?}\s+}\);',
-        '});',
-        modified_content,
+    content = re.sub(
+        r'{% for podcast in podcasts\[:4\] %}.*?{% endfor %}',
+        podcasts_html,
+        content,
         flags=re.DOTALL
     )
     
-    # Create a temporary template file
-    with open('temp_dashboard.html', 'w') as file:
-        file.write(modified_content)
-    
-    # Set up a temporary Environment with the file system loader pointing to the current directory
-    temp_env = Environment(loader=FileSystemLoader('.'))
-    
-    # Render the dashboard
-    dashboard_template = temp_env.get_template('temp_dashboard.html')
-    html_content = dashboard_template.render(
-        articles=articles,
-        podcasts=podcasts,
-        last_updated=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        now=datetime.now()
-    )
-
-    # Write the HTML to file
+    # Write the static HTML
     with open('static_site/index.html', 'w') as f:
-        f.write(html_content)
-    
-    # Clean up the temporary file
-    os.remove('temp_dashboard.html')
+        f.write(content)
     
     print(f"Successfully generated index.html")
-
-    # Copy any static assets
-    import shutil
+    
+    # Copy static assets
     if os.path.exists('static'):
         shutil.copytree('static', 'static_site/static', dirs_exist_ok=True)
         print(f"Copied static assets")
     
-    # Create a simple CSS file if static doesn't exist
-    if not os.path.exists('static_site/static'):
-        os.makedirs('static_site/static', exist_ok=True)
-        with open('static_site/static/styles.css', 'w') as f:
-            f.write("/* Basic styles */\n")
-        print(f"Created basic static directory")
+    print(f"Static site generated successfully in 'static_site' directory")
     
-    print(f"Static site generated in 'static_site' directory.")
-    print(f"Upload these files to GitHub Pages to share with your friend.")
 except Exception as e:
     print(f"Error generating static site: {str(e)}")
     import traceback
