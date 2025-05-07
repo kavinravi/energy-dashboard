@@ -49,23 +49,26 @@ try:
     # Replace the static template variables
     content = content.replace('{{ last_updated }}', datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     content = content.replace('{{ now.year }}', str(datetime.now().year))
-    
-    # --- ARTICLES_COLUMN_1_PLACEHOLDER (articles[:3]) ---
-    articles_col1_html = ""
-    for article in articles[:3]: # First 3 articles
+
+    # Helper function to generate a single article card HTML
+    def generate_article_card(article):
         title = article.get('title', 'Untitled')
         summary = article.get('summary', '')
         link = article.get('link', '#')
         date = article.get('date', '')
         source = article.get('source', '')
-        categories = article.get('categories', 'innovation,business')
-        category_badges = ""
-        for category_str in categories.split(','):
-            category_name = {'policy': 'Policy', 'innovation': 'Innovation', 'business': 'Business', 'climate': 'Climate'}.get(category_str.strip(), category_str.strip().capitalize())
-            category_badges += f'<span class="category-badge category-{category_str.strip()}">{category_name}</span>\\n'
+        categories = article.get('categories', 'innovation,business') # Default categories
+        # Clean up category string: remove newlines and ensure comma separation
+        cleaned_categories = ",".join(c.strip() for c in categories.replace('\\n', ',').split(',') if c.strip())
         
-        articles_col1_html += f'''
-        <div class="news-card p-4 rounded-lg border border-gray-100" data-categories="{categories}">
+        category_badges = ""
+        for category_str in cleaned_categories.split(','):
+            if not category_str: continue # Skip empty category strings
+            category_name = {'policy': 'Policy', 'innovation': 'Innovation', 'business': 'Business', 'climate': 'Climate'}.get(category_str, category_str.capitalize())
+            category_badges += f'<span class="category-badge category-{category_str}">{category_name}</span>\\n'
+        
+        return f'''
+        <div class="news-card p-4 rounded-lg border border-gray-100" data-categories="{cleaned_categories}">
             <div class="flex flex-wrap gap-2 mb-2">
                 {category_badges}
                 <span class="ml-auto text-xs text-gray-500">{date}</span>
@@ -82,129 +85,84 @@ try:
             </div>
         </div>
         '''
+
+    # Helper function to generate a single podcast card HTML
+    def generate_podcast_card(podcast):
+        title = podcast.get('title', 'Untitled')
+        summary = podcast.get('summary', 'LLM summary failed or not available.') # Default summary
+        url = podcast.get('url', '#')
+        release_date = podcast.get('release_date', '')
+        return f'''
+        <div class="news-card p-4 rounded-lg border border-gray-100">
+            <div class="mb-2 flex justify-between items-center">
+                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Podcast</span>
+                <span class="text-xs text-gray-500">{release_date}</span>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
+                <a href="{url}" target="_blank" class="hover:text-primary-600">{title}</a>
+            </h3>
+            <p class="text-sm text-gray-600 mb-3">{summary}</p>
+            <a href="{url}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
+                <i class="fas fa-play mr-1"></i> Listen
+            </a>
+        </div>
+        '''
+
+    # --- Main Content Sections ---
+    articles_col1_html = "".join(generate_article_card(article) for article in articles[:3])
     content = content.replace('<!-- ARTICLES_COLUMN_1_PLACEHOLDER -->', articles_col1_html)
 
-    # --- PODCASTS_COLUMN_1_PLACEHOLDER (podcasts[:2]) ---
-    podcasts_col1_html = ""
-    for podcast in podcasts[:2]: # First 2 podcasts
-        title = podcast.get('title', 'Untitled')
-        summary = podcast.get('summary', '')
-        url = podcast.get('url', '#')
-        release_date = podcast.get('release_date', '')
-        podcasts_col1_html += f'''
-        <div class="news-card p-4 rounded-lg border border-gray-100">
-            <div class="mb-2 flex justify-between items-center">
-                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Podcast</span>
-                <span class="text-xs text-gray-500">{release_date}</span>
-            </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                <a href="{url}" target="_blank" class="hover:text-primary-600">{title}</a>
-            </h3>
-            <p class="text-sm text-gray-600 mb-3">{summary}</p>
-            <a href="{url}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                <i class="fas fa-play mr-1"></i> Listen
-            </a>
-        </div>
-        '''
+    podcasts_col1_html = "".join(generate_podcast_card(podcast) for podcast in podcasts[:2])
     content = content.replace('<!-- PODCASTS_COLUMN_1_PLACEHOLDER -->', podcasts_col1_html)
 
-    # --- ARTICLE_COLUMN_2_PLACEHOLDER (articles[3] if exists) ---
-    article_col2_html = ""
-    if len(articles) > 3:
-        article = articles[3]
-        title = article.get('title', 'Untitled')
-        summary = article.get('summary', '')
-        link = article.get('link', '#')
-        date = article.get('date', '')
-        source = article.get('source', '')
-        categories = article.get('categories', 'innovation,business')
-        category_badges = ""
-        for category_str in categories.split(','):
-            category_name = {'policy': 'Policy', 'innovation': 'Innovation', 'business': 'Business', 'climate': 'Climate'}.get(category_str.strip(), category_str.strip().capitalize())
-            category_badges += f'<span class="category-badge category-{category_str.strip()}">{category_name}</span>\\n'
-        article_col2_html = f'''
-        <div class="news-card p-4 rounded-lg border border-gray-100" data-categories="{categories}">
-            <div class="flex flex-wrap gap-2 mb-2">
-                {category_badges}
-                <span class="ml-auto text-xs text-gray-500">{date}</span>
-            </div>
-            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                <a href="{link}" target="_blank" class="hover:text-primary-600">{title}</a>
-            </h3>
-            <p class="text-gray-600 mb-3">{summary}</p>
-            <div class="flex items-center justify-between">
-                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">{source}</span>
-                <a href="{link}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-        '''
+    article_col2_html = generate_article_card(articles[3]) if len(articles) > 3 else ""
     content = content.replace('<!-- ARTICLE_COLUMN_2_PLACEHOLDER -->', article_col2_html)
 
-    # --- ARTICLE_COLUMN_3_PLACEHOLDER (articles[4] if exists) ---
-    article_col3_html = ""
-    if len(articles) > 4: # For the article in the "additional row", first column
-        article = articles[4]
-        title = article.get('title', 'Untitled')
-        summary = article.get('summary', '')
-        link = article.get('link', '#')
-        date = article.get('date', '')
-        source = article.get('source', '')
-        categories = article.get('categories', 'innovation,business')
-        category_badges = ""
-        for category_str in categories.split(','):
-            category_name = {'policy': 'Policy', 'innovation': 'Innovation', 'business': 'Business', 'climate': 'Climate'}.get(category_str.strip(), category_str.strip().capitalize())
-            category_badges += f'<span class="category-badge category-{category_str.strip()}">{category_name}</span>\\n'
-        article_col3_html = f'''
-        <div class="news-card p-4 rounded-lg border border-gray-100" data-categories="{categories}">
-            <div class="flex flex-wrap gap-2 mb-2">
-                {category_badges}
-                <span class="ml-auto text-xs text-gray-500">{date}</span>
-            </div>
-            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                <a href="{link}" target="_blank" class="hover:text-primary-600">{title}</a>
-            </h3>
-            <p class="text-gray-600 mb-3">{summary}</p>
-            <div class="flex items-center justify-between">
-                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">{source}</span>
-                <a href="{link}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-        '''
+    article_col3_html = generate_article_card(articles[4]) if len(articles) > 4 else ""
     content = content.replace('<!-- ARTICLE_COLUMN_3_PLACEHOLDER -->', article_col3_html)
     
-    # --- PODCASTS_COLUMN_2_PLACEHOLDER (podcasts[2] if exists) ---
-    podcasts_col2_html = ""
-    if len(podcasts) > 2: # For the podcast in the "additional row", second column
-        podcast = podcasts[2]
-        title = podcast.get('title', 'Untitled')
-        summary = podcast.get('summary', '')
-        url = podcast.get('url', '#')
-        release_date = podcast.get('release_date', '')
-        podcasts_col2_html += f'''
-        <div class="news-card p-4 rounded-lg border border-gray-100">
-            <div class="mb-2 flex justify-between items-center">
-                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Podcast</span>
-                <span class="text-xs text-gray-500">{release_date}</span>
-            </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                <a href="{url}" target="_blank" class="hover:text-primary-600">{title}</a>
-            </h3>
-            <p class="text-sm text-gray-600 mb-3">{summary}</p>
-            <a href="{url}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                <i class="fas fa-play mr-1"></i> Listen
-            </a>
+    podcasts_col2_html = generate_podcast_card(podcasts[2]) if len(podcasts) > 2 else ""
+    content = content.replace('<!-- PODCASTS_COLUMN_2_PLACEHOLDER -->', podcasts_col2_html)
+
+    # --- Sidebar Sections ---
+    featured_podcast_html = ""
+    if len(podcasts) > 3:
+        podcast = podcasts[3]
+        featured_podcast_html = f'''
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <span class="text-energy-yellow mr-2"><i class="fas fa-podcast"></i></span>
+                Featured Podcast
+            </h2>
+            {generate_podcast_card(podcast)}
         </div>
         '''
-    # Note: Your template only shows one podcast here (podcasts[2]). If you intended more, adjust accordingly.
-    content = content.replace('<!-- PODCASTS_COLUMN_2_PLACEHOLDER -->', podcasts_col2_html)
+    content = content.replace('<!-- FEATURED_PODCAST_PLACEHOLDER -->', featured_podcast_html)
+
+    policy_update_article_html = ""
+    if len(articles) > 5:
+        article = articles[5]
+        policy_update_article_html = f'''
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <span class="text-energy-blue mr-2"><i class="fas fa-newspaper"></i></span>
+                Policy Update
+            </h2>
+            {generate_article_card(article)}
+        </div>
+        '''
+    content = content.replace('<!-- POLICY_UPDATE_ARTICLE_PLACEHOLDER -->', policy_update_article_html)
     
-    # Clean up any leftover Jinja-like template variables if any were missed (should not be necessary for data)
-    content = re.sub(r'{{\\s*.*?\\s*}}', '', content) # For {{ variable }}
-    content = re.sub(r'{%\\s*.*?\\s*%}', '', content, flags=re.DOTALL) # For {% logic %}
+    # Final cleanup of any stray template tags that were not replaced by placeholders
+    # This specifically targets tags that might be left if a placeholder was missed or data was empty
+    content = re.sub(r'<!-- [A-Z0-9_]+_PLACEHOLDER -->', '', content) # Remove any unfilled placeholders
+    content = re.sub(r'{{\s*.*?\s*}}', '', content) # Remove {{ variable }} if data was missing for it
+    # The {% if ... %} tags should ideally be handled by the conditional logic above (e.g. if len(articles) > X)
+    # If some are still left, it indicates a mismatch between template structure and generation logic.
+    # A more robust solution for complex templates is a proper templating engine like Jinja2.
+    # For now, let's try a slightly more aggressive cleanup for leftover {% ... %} blocks if they are simple
+    content = re.sub(r'{%\s*if.*?%}(.*?){%\s*endif\s*%}', lambda m: m.group(1) if "PLACEHOLDER" not in m.group(1) else "", content, flags=re.DOTALL)
+    content = re.sub(r'{%\s*.*?\s*%}', '', content, flags=re.DOTALL) # General catch-all for other tags
 
     # Write the static HTML
     with open('static_site/index.html', 'w') as f:

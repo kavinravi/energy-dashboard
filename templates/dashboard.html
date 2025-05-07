@@ -125,75 +125,9 @@
             <!-- Sidebar with trends and final podcast -->
             <section class="lg:col-span-4">
                 <div class="space-y-6">
-                    <!-- Final podcast -->
-                    {% if podcasts|length > 3 %}
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                            <span class="text-energy-yellow mr-2"><i class="fas fa-podcast"></i></span>
-                            Featured Podcast
-                        </h2>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100">
-                            <div class="mb-2 flex justify-between items-center">
-                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                                    Podcast
-                                </span>
-                                <span class="text-xs text-gray-500">{{ podcasts[3].release_date }}</span>
-                            </div>
-                            
-                            <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="{{ podcasts[3].url }}" target="_blank" class="hover:text-primary-600">
-                                    {{ podcasts[3].title }}
-                                </a>
-                            </h3>
-                            
-                            <p class="text-sm text-gray-600 mb-3">{{ podcasts[3].summary }}</p>
-                            
-                            <a href="{{ podcasts[3].url }}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                                <i class="fas fa-play mr-1"></i> Listen
-                            </a>
-                        </div>
-                    </div>
-                    {% endif %}
+                    <!-- FEATURED_PODCAST_PLACEHOLDER -->
                     
-                    <!-- Last article -->
-                    {% if articles|length > 5 %}
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                            <span class="text-energy-blue mr-2"><i class="fas fa-newspaper"></i></span>
-                            Policy Update
-                        </h2>
-                        
-                        <div class="news-card p-4 rounded-lg border border-gray-100" 
-                             data-categories="{{ articles[5].categories|default('policy,innovation,business,climate') }}">
-                            <div class="flex flex-wrap gap-2 mb-2">
-                                {% for category in articles[5].categories|default('innovation,business')|split(',') %}
-                                <span class="category-badge category-{{ category }}">
-                                    {{ {'policy': 'Policy', 'innovation': 'Innovation', 'business': 'Business', 'climate': 'Climate'}[category] }}
-                                </span>
-                                {% endfor %}
-                                <span class="ml-auto text-xs text-gray-500">{{ articles[5].date }}</span>
-                            </div>
-                            
-                            <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                <a href="{{ articles[5].link }}" target="_blank" class="hover:text-primary-600">
-                                    {{ articles[5].title }}
-                                </a>
-                            </h3>
-                            
-                            <p class="text-gray-600 mb-3">{{ articles[5].summary }}</p>
-                            
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                    {{ articles[5].source }}
-                                </span>
-                                <a href="{{ articles[5].link }}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                    Read more <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
+                    <!-- POLICY_UPDATE_ARTICLE_PLACEHOLDER -->
                     
                     <!-- Market Trends Box -->
                     <div class="bg-gradient-to-r from-primary-600 to-primary-800 rounded-xl shadow-sm p-6 text-white">

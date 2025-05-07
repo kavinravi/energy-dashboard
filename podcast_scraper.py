@@ -392,6 +392,7 @@ class PodcastScraper:
         truncated_transcript = transcript_text[:max_input_chars]
 
         try:
+            print(f"Attempting OpenAI API call for summarization. Transcript length (chars): {len(truncated_transcript)}")
             print(f"Sending transcript (truncated to {len(truncated_transcript)} chars) to LLM for summarization...")
             completion = openai.chat.completions.create(
                 model="gpt-3.5-turbo", # Or another cost-effective model
