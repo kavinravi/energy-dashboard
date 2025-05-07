@@ -70,4 +70,4 @@ Maintained by Kavin Ravi.
 
 ## Last Updated
 
-Last updated on May 5, 2025. 
+Last updated on May 5, 2025.
