@@ -50,7 +50,7 @@ try:
     # Replace the static template variables
     pacific_tz = pytz.timezone('America/Los_Angeles')
     current_time_pst = datetime.now(pytz.utc).astimezone(pacific_tz)
-    content = content.replace('{{ last_updated }}', current_time_pst.strftime("%Y-%m-%d %H:%M:%S %Z"))
+    content = content.replace('{{ last_updated }}', current_time_pst.strftime("%Y-%m-%d %H:%M:%S (PST)"))
     content = content.replace('{{ now.year }}', str(current_time_pst.year))
 
     # Helper function to generate a single article card HTML

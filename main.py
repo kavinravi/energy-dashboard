@@ -188,7 +188,7 @@ def dashboard():
             'dashboard.html',
             articles=articles,
             podcasts=podcasts,
-            last_updated=current_time_pst.strftime("%Y-%m-%d %H:%M:%S %Z"),
+            last_updated=current_time_pst.strftime("%Y-%m-%d %H:%M:%S (PST)"),
             now=current_time_pst
         )
     except Exception as e:
