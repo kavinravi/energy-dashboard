@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from flask import Flask, render_template, jsonify, request
-from scraper.web_scraper import WebScraper
-from scraper.podcast_scraper import PodcastScraper
+from web_scraper import WebScraper
+from podcast_scraper import PodcastScraper
 import os
 from datetime import datetime
 import json
@@ -42,19 +42,17 @@ def split_filter(value, delimiter=','):
 
 # Initialize scrapers
 try:
-    # Get Spotify credentials from environment variables
+    # Get Spotify credentials from environment variables (still read for now, but not passed to PodcastScraper)
     spotify_client_id = os.getenv('SPOTIFY_CLIENT_ID')
     spotify_client_secret = os.getenv('SPOTIFY_CLIENT_SECRET')
     
     if not spotify_client_id or not spotify_client_secret:
-        logger.warning("Spotify credentials not found in environment variables. Some features may not work.")
+        logger.warning("Spotify credentials not found in environment variables. Podcast features requiring Spotify API (if any in future) may not work.")
     
     web_scraper = WebScraper()
-    podcast_scraper = PodcastScraper(
-        client_id=spotify_client_id,
-        client_secret=spotify_client_secret
-    )
-    logger.info("Successfully initialized scrapers")
+    podcast_scraper = PodcastScraper() # No arguments needed now
+    
+    logger.info("Successfully initialized scrapers (PodcastScraper using RSS)")
 except Exception as e:
     logger.error(f"Error initializing scrapers: {str(e)}")
     traceback.print_exc()
@@ -138,18 +136,28 @@ def update_content() -> bool:
         # Categorize articles
         all_articles = categorize_articles(all_articles)
         
-        # Scrape and filter podcast episodes
-        podcast_episodes = podcast_scraper.get_latest_episodes()
-        filtered_episodes = podcast_scraper.filter_recent_episodes(
-            podcast_episodes,
-            days=podcast_days
-        )
+        # Save articles even if we can't get podcasts
+        if all_articles:
+            web_scraper.save_articles(all_articles, 'articles.json')
+            logger.info(f"Successfully updated {len(all_articles)} articles")
         
-        # Save results
-        web_scraper.save_articles(all_articles, 'articles.json')
-        podcast_scraper.save_episodes(filtered_episodes, 'podcasts.json')
+        # Try to get podcast episodes, but don't fail if we can't
+        try:
+            # Scrape and filter podcast episodes
+            podcast_episodes = podcast_scraper.get_latest_episodes()
+            filtered_episodes = podcast_scraper.filter_recent_episodes(
+                podcast_episodes,
+                days=podcast_days
+            )
+            
+            # Save episodes
+            if filtered_episodes:
+                podcast_scraper.save_episodes(filtered_episodes, 'podcasts.json')
+                logger.info(f"Successfully updated {len(filtered_episodes)} podcast episodes")
+        except Exception as e:
+            logger.error(f"Error updating podcast content: {str(e)}")
+            logger.info("Continuing with article content only")
         
-        logger.info(f"Successfully updated content: {len(all_articles)} articles, {len(filtered_episodes)} episodes")
         return True
     except Exception as e:
         logger.error(f"Error updating content: {str(e)}")
@@ -228,12 +236,16 @@ if __name__ == '__main__':
     os.makedirs('data', exist_ok=True)
     os.makedirs('logs', exist_ok=True)
     
-    # Initial content update
-    if not update_content():
-        logger.warning("Initial content update failed")
+    # Initial content update - don't fail if it doesn't work
+    try:
+        update_content()
+    except Exception as e:
+        logger.warning(f"Initial content update failed: {str(e)}")
+        logger.warning("Will continue with existing content")
     
     # Get port from environment variable for hosting platforms like Heroku
     port = int(os.environ.get('PORT', 9000))
     
     # Run the Flask application
+    logger.info(f"Starting Flask application on port {port}")
     app.run(debug=False, host='0.0.0.0', port=port)

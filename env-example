@@ -1,0 +1,11 @@
+# Spotify API credentials (required for fetching podcast episodes)
+SPOTIFY_CLIENT_ID=your_spotify_client_id_here
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret_here
+SPOTIPY_REDIRECT_URI=http://localhost:9000
+
+# Content filter settings
+ARTICLE_DAYS_FILTER=30
+PODCAST_DAYS_FILTER=60
+
+# Optional: Port setting for the web server (defaults to 9000 if not specified)
+PORT=9000 

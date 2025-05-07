@@ -1,5 +1,3 @@
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
 import requests
 from datetime import datetime, timedelta
 import json
@@ -10,22 +8,31 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 import traceback
 import re
+import feedparser
+import openai
 
 class PodcastScraper:
-    def __init__(self, client_id: str, client_secret: str):
-        """Initialize Spotify client with credentials"""
-        auth_manager = SpotifyClientCredentials(
-            client_id=client_id,
-            client_secret=client_secret
-        )
-        self.sp = spotipy.Spotify(auth_manager=auth_manager)
-        self.show_id = "4C5Qx3wJn0GeTnDxIVYcAR"  # The Energy Gang podcast ID
-        
-        # Download required NLTK data
-        nltk.download('punkt')
-        nltk.download('stopwords')
+    def __init__(self): # Removed client_id and client_secret
+        """Initialize Podcast Scraper"""
+        nltk.download('punkt', quiet=True)
+        nltk.download('stopwords', quiet=True)
         self.stop_words = set(stopwords.words('english'))
-    
+        self.rss_feed_url = "https://feeds.megaphone.fm/catalyst"
+        self.whisper_model = None # To be loaded on demand
+
+    def _load_whisper_model(self):
+        import whisper # <-- IMPORT WHISPER HERE
+        if self.whisper_model is None:
+            try:
+                print("Loading Whisper model (base.en)... This might take a moment on first run.")
+                self.whisper_model = whisper.load_model("base.en")
+                print("Whisper model loaded successfully.")
+            except Exception as e:
+                print(f"Error loading Whisper model: {str(e)}")
+                traceback.print_exc()
+                # Potentially raise an error or handle it so transcription is skipped
+        return self.whisper_model
+
     def summarize_text(self, text: str, num_sentences: int = 4) -> str:
         """Generate a high-quality summary focused on key information"""
         try:
@@ -145,90 +152,175 @@ class PodcastScraper:
             traceback.print_exc()
             return text[:300] + '...' if len(text) > 300 else text
     
+    def get_latest_episodes(self, limit: int = 5) -> List[Dict]: # Reduced limit for testing/daily runs
+        """Get latest podcast episodes from RSS, download audio, and transcribe."""
+        print(f"Fetching podcast episodes from RSS feed: {self.rss_feed_url}")
+        feed = feedparser.parse(self.rss_feed_url)
+        
+        if feed.bozo:
+            print(f"Error parsing RSS feed: {feed.bozo_exception}")
+            return []
+
+        episodes_data = []
+        model = self._load_whisper_model()
+        if not model:
+            print("Whisper model not loaded, cannot transcribe. Returning episodes without transcripts.")
+            # Fallback to just getting metadata if transcription fails to load
+            for entry in feed.entries[:limit]:
+                release_date_parsed = datetime(*entry.published_parsed[:6]) if hasattr(entry, 'published_parsed') else datetime.now()
+                episodes_data.append({
+                    'title': entry.title if hasattr(entry, 'title') else "Untitled Episode",
+                    'description': entry.summary if hasattr(entry, 'summary') else "",
+                    'summary': self.summarize_text(entry.summary if hasattr(entry, 'summary') else ""),
+                    'release_date': release_date_parsed.strftime('%Y-%m-%d'),
+                    'duration_ms': 0, # Not easily available from all RSS, can parse entry.itunes_duration
+                    'url': entry.link if hasattr(entry, 'link') else "",
+                    'audio_url': next((link.href for link in entry.links if link.type.startswith('audio/')), None),
+                    'transcript': "Transcription failed or model not loaded.",
+                    'source': feed.feed.title if hasattr(feed.feed, 'title') else 'Catalyst Podcast RSS',
+                    'timestamp': datetime.now().isoformat()
+                })
+            return self.filter_recent_episodes(episodes_data)
+
+        for entry in feed.entries[:limit]:
+            print(f"Processing episode: {entry.title if hasattr(entry, 'title') else 'Untitled'}")
+            audio_url = None
+            if hasattr(entry, 'enclosures'):
+                for enclosure in entry.enclosures:
+                    if enclosure.type.startswith('audio/'):
+                        audio_url = enclosure.href
+                        break
+            
+            if not audio_url: # Fallback to links if no enclosure
+                 if hasattr(entry, 'links'):
+                    audio_url = next((link.href for link in entry.links if link.type.startswith('audio/')), None)
+
+            transcript_text = "Audio URL not found or transcription skipped."
+            description_text = entry.summary if hasattr(entry, 'summary') else ""
+            current_summary = "Summary not generated." # Default
+
+            if audio_url:
+                try:
+                    print(f"Downloading audio from: {audio_url}")
+                    audio_response = requests.get(audio_url, timeout=30) # Increased timeout
+                    audio_response.raise_for_status()
+                    
+                    # Save temporary audio file
+                    temp_audio_filename = "temp_podcast_audio.m4a" # Or determine extension
+                    with open(temp_audio_filename, 'wb') as f:
+                        f.write(audio_response.content)
+                    print(f"Audio downloaded to {temp_audio_filename}")
+
+                    print("Starting transcription...")
+                    result = model.transcribe(temp_audio_filename)
+                    transcript_text = result["text"]
+                    print("Transcription complete.")
+                    
+                    os.remove(temp_audio_filename) # Clean up
+                    print(f"Temporary audio file {temp_audio_filename} removed.")
+
+                except requests.exceptions.RequestException as req_e:
+                    print(f"Error downloading audio for {entry.title}: {str(req_e)}")
+                    transcript_text = "Audio download failed."
+                except Exception as e:
+                    print(f"Error during transcription for {entry.title}: {str(e)}")
+                    transcript_text = "Transcription failed."
+                    if os.path.exists("temp_podcast_audio.m4a"):
+                        os.remove("temp_podcast_audio.m4a")
+
+            if transcript_text and transcript_text not in ["Audio URL not found or transcription skipped.", "Audio download failed.", "Transcription failed.", "Transcription failed or model not loaded."]:
+                print(f"Attempting LLM summary from transcript for: {entry.title if hasattr(entry, 'title') else 'Untitled'}")
+                current_summary = self.summarize_transcript_with_llm(transcript_text)
+                
+                # Fallback to NLTK summary of transcript if LLM summary failed or wasn't suitable
+                if current_summary in ["Summary not available.", "LLM Summary not available (API key missing).", "LLM summary generation failed."]:
+                    print(f"LLM summary failed or not suitable. Falling back to NLTK summary of transcript for: {entry.title if hasattr(entry, 'title') else 'Untitled'}")
+                    current_summary = self.summarize_text(transcript_text, num_sentences=5)
+            else:
+                # Fallback to summarizing the original description if transcript is unavailable
+                print(f"Transcript not available. Generating summary from description for: {entry.title if hasattr(entry, 'title') else 'Untitled'}")
+                current_summary = self.summarize_text(description_text, num_sentences=3)
+
+            release_date_parsed = datetime(*entry.published_parsed[:6]) if hasattr(entry, 'published_parsed') else datetime.now()
+            
+            episodes_data.append({
+                'title': entry.title if hasattr(entry, 'title') else "Untitled Episode",
+                'description': description_text, # Keep original description
+                'summary': current_summary, # This will now prioritize LLM summary
+                'transcript': transcript_text,
+                'release_date': release_date_parsed.strftime('%Y-%m-%d'),
+                'duration_ms': self.parse_duration(getattr(entry, 'itunes_duration', '0')) * 1000,
+                'url': entry.link if hasattr(entry, 'link') else audio_url, 
+                'source': feed.feed.title if hasattr(feed.feed, 'title') else 'Catalyst Podcast RSS',
+                'timestamp': datetime.now().isoformat()
+            })
+
+        return self.filter_recent_episodes(episodes_data) # Apply existing filter
+
+    def parse_duration(self, duration_str: str) -> int:
+        """Parse itunes:duration string (HH:MM:SS, MM:SS, or S) into seconds."""
+        parts = list(map(int, duration_str.split(':')))
+        seconds = 0
+        if len(parts) == 3: # HH:MM:SS
+            seconds = parts[0] * 3600 + parts[1] * 60 + parts[2]
+        elif len(parts) == 2: # MM:SS
+            seconds = parts[0] * 60 + parts[1]
+        elif len(parts) == 1: # S
+            seconds = parts[0]
+        return seconds
+
     def filter_recent_episodes(self, episodes: List[Dict], days: int = 30) -> List[Dict]:
         """Filter and deduplicate recent episodes"""
         try:
-            # Convert dates to datetime objects
+            # Convert dates to datetime objects if they are strings
             for episode in episodes:
-                if isinstance(episode['release_date'], str):
-                    episode['release_date'] = datetime.strptime(episode['release_date'], '%Y-%m-%d')
-            
-            # Filter by date
+                if isinstance(episode.get('release_date'), str):
+                    try:
+                        episode['release_date_dt'] = datetime.strptime(episode['release_date'], '%Y-%m-%d')
+                    except ValueError:
+                         # Handle cases where date might be in a different format or invalid
+                        print(f"Warning: Could not parse date for episode {episode.get('title')}: {episode.get('release_date')}")
+                        episode['release_date_dt'] = datetime.now() # Default to now if parsing fails
+                elif isinstance(episode.get('release_date'), datetime):
+                     episode['release_date_dt'] = episode['release_date']
+                else: # if 'release_date' field doesn't exist or is not recognized type
+                    episode['release_date_dt'] = datetime.now()
+
             cutoff_date = datetime.now() - timedelta(days=days)
             recent_episodes = [
-                episode for episode in episodes 
-                if episode['release_date'] >= cutoff_date
+                episode for episode in episodes
+                if episode.get('release_date_dt', datetime.now()) >= cutoff_date # Use .get for safety
             ]
-            
-            # Deduplicate similar content
+
+            # Deduplicate similar content (simple title check for now)
             unique_episodes = []
             seen_titles = set()
             for episode in recent_episodes:
-                # Create a simplified version of the title for comparison
-                simple_title = ''.join(
-                    c.lower() for c in episode['title'] 
-                    if c.isalnum()
-                )
-                
-                # Check if we've seen a similar title
-                if not any(
-                    len(set(simple_title) & set(seen)) / len(set(simple_title) | set(seen)) > 0.8
-                    for seen in seen_titles
-                ):
+                simple_title = ''.join(c.lower() for c in episode['title'] if c.isalnum())
+                # A more robust check might involve GUIDs from RSS if available (entry.id)
+                # For now, keeping title similarity
+                is_similar = False
+                for seen in seen_titles:
+                    # Basic similarity: if one title is a substring of another or very close
+                    # This could be improved with fuzzy matching if needed
+                    if simple_title in seen or seen in simple_title or \
+                       len(set(simple_title) & set(seen)) / len(set(simple_title) | set(seen)) > 0.8:
+                        is_similar = True
+                        break
+                if not is_similar:
                     unique_episodes.append(episode)
                     seen_titles.add(simple_title)
             
+            # Clean up the temporary datetime object
+            for episode in unique_episodes:
+                if 'release_date_dt' in episode:
+                    del episode['release_date_dt']
+
             return unique_episodes
         except Exception as e:
             print(f"Error filtering episodes: {str(e)}")
             traceback.print_exc()
-            return episodes
-    
-    def get_latest_episodes(self, limit: int = 10) -> List[Dict]:
-        """Get the latest episodes of the podcast with improved handling"""
-        try:
-            print("Fetching podcast episodes...")
-            results = self.sp.show_episodes(self.show_id, limit=limit)
-            episodes = []
-            
-            for episode in results['items']:
-                try:
-                    # Convert release date to datetime
-                    release_date = datetime.strptime(episode['release_date'], '%Y-%m-%d')
-                    
-                    # Skip episodes older than 30 days
-                    if datetime.now() - release_date > timedelta(days=30):
-                        continue
-                    
-                    # Clean and summarize description
-                    description = episode['description'].replace('\n', ' ').strip()
-                    summary = self.summarize_text(description)
-                    
-                    episodes.append({
-                        'title': episode['name'],
-                        'description': description,
-                        'summary': summary,
-                        'release_date': episode['release_date'],
-                        'duration_ms': episode['duration_ms'],
-                        'url': episode['external_urls']['spotify'],
-                        'source': 'The Energy Gang Podcast',
-                        'timestamp': datetime.now().isoformat()
-                    })
-                except Exception as e:
-                    print(f"Error processing episode {episode.get('name', 'Unknown')}: {str(e)}")
-                    traceback.print_exc()
-                    continue
-            
-            # Filter and deduplicate episodes
-            episodes = self.filter_recent_episodes(episodes)
-            
-            print(f"Successfully fetched {len(episodes)} recent podcast episodes")
-            return episodes
-            
-        except Exception as e:
-            print(f"Error fetching podcast episodes: {str(e)}")
-            traceback.print_exc()
-            return []
+            return episodes # Return original list if filtering fails
     
     def save_episodes(self, episodes: List[Dict], filename: str):
         """Save episodes to a JSON file"""
@@ -239,13 +331,23 @@ class PodcastScraper:
                 episode_copy = episode.copy()
                 if isinstance(episode_copy.get('release_date'), datetime):
                     episode_copy['release_date'] = episode_copy['release_date'].strftime('%Y-%m-%d')
+                # Ensure 'timestamp' is also stringified if it's a datetime object
                 if isinstance(episode_copy.get('timestamp'), datetime):
-                    episode_copy['timestamp'] = episode_copy['timestamp'].isoformat()
+                     episode_copy['timestamp'] = episode_copy['timestamp'].isoformat()
                 serializable_episodes.append(episode_copy)
             
+            # Create data directory if it doesn't exist
             os.makedirs('data', exist_ok=True)
-            with open(f'data/{filename}', 'w') as f:
+            
+            # Save to both root and data directory for compatibility
+            # Root location
+            with open(filename, 'w') as f:
                 json.dump(serializable_episodes, f, indent=2)
+            
+            # Data directory
+            with open(os.path.join('data', filename), 'w') as f:
+                json.dump(serializable_episodes, f, indent=2)
+            
             print(f"Successfully saved {len(episodes)} episodes to {filename}")
         except Exception as e:
             print(f"Error saving episodes: {str(e)}")
@@ -254,14 +356,51 @@ class PodcastScraper:
     def load_episodes(self, filename: str) -> List[Dict]:
         """Load episodes from a JSON file"""
         try:
-            with open(f'data/{filename}', 'r') as f:
-                episodes = json.load(f)
-            print(f"Successfully loaded {len(episodes)} episodes from {filename}")
+            # Try loading from root first, then from data directory
+            try:
+                with open(filename, 'r') as f:
+                    episodes = json.load(f)
+            except FileNotFoundError:
+                with open(os.path.join('data', filename), 'r') as f:
+                    episodes = json.load(f)
+                
             return episodes
-        except FileNotFoundError:
-            print(f"No episodes file found at {filename}")
-            return []
         except Exception as e:
             print(f"Error loading episodes: {str(e)}")
             traceback.print_exc()
-            return [] 
+            return []
+
+    def summarize_transcript_with_llm(self, transcript_text: str) -> str:
+        if not transcript_text or len(transcript_text.split()) < 30: # Min length for meaningful summary
+            print("Transcript too short for LLM summarization or not available.")
+            return "Summary not available."
+
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            print("OPENAI_API_KEY not found in environment. Skipping LLM summarization.")
+            return "LLM Summary not available (API key missing)."
+        
+        openai.api_key = api_key
+        # Shorten transcript if it's too long to reduce token usage/cost
+        # OpenAI's gpt-3.5-turbo has a context window (e.g., 4k or 16k tokens)
+        # 1 token is roughly 3/4 of a word.
+        max_input_chars = 20000 # Approx 5000 tokens, adjust as needed
+        truncated_transcript = transcript_text[:max_input_chars]
+
+        try:
+            print(f"Sending transcript (truncated to {len(truncated_transcript)} chars) to LLM for summarization...")
+            completion = openai.chat.completions.create(
+                model="gpt-3.5-turbo", # Or another cost-effective model
+                messages=[
+                    {"role": "system", "content": "You are an expert at summarizing podcast transcripts. Provide a concise, engaging summary of the key topics discussed in about 100-150 words."},
+                    {"role": "user", "content": f"Summarize this podcast transcript:\n\n{truncated_transcript}"}
+                ],
+                max_tokens=200, # Max tokens for the summary itself
+                temperature=0.6,
+            )
+            llm_summary = completion.choices[0].message.content.strip()
+            print("LLM summary generated.")
+            return llm_summary
+        except Exception as e:
+            print(f"Error during LLM summarization: {str(e)}")
+            return "LLM summary generation failed." 

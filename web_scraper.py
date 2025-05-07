@@ -416,9 +416,18 @@ class WebScraper:
                     article_copy['timestamp'] = article_copy['timestamp'].isoformat()
                 serializable_articles.append(article_copy)
             
+            # Create data directory if it doesn't exist
             os.makedirs('data', exist_ok=True)
-            with open(f'data/{filename}', 'w') as f:
+            
+            # Save to both root and data directory for compatibility
+            # Root location
+            with open(filename, 'w') as f:
                 json.dump(serializable_articles, f, indent=2)
+            
+            # Data directory
+            with open(os.path.join('data', filename), 'w') as f:
+                json.dump(serializable_articles, f, indent=2)
+            
             print(f"Successfully saved {len(articles)} articles to {filename}")
         except Exception as e:
             print(f"Error saving articles: {str(e)}")
@@ -427,13 +436,15 @@ class WebScraper:
     def load_articles(self, filename: str) -> List[Dict]:
         """Load articles from a JSON file"""
         try:
-            with open(f'data/{filename}', 'r') as f:
-                articles = json.load(f)
-            print(f"Successfully loaded {len(articles)} articles from {filename}")
+            # Try loading from root first, then from data directory
+            try:
+                with open(filename, 'r') as f:
+                    articles = json.load(f)
+            except FileNotFoundError:
+                with open(os.path.join('data', filename), 'r') as f:
+                    articles = json.load(f)
+                
             return articles
-        except FileNotFoundError:
-            print(f"No articles file found at {filename}")
-            return []
         except Exception as e:
             print(f"Error loading articles: {str(e)}")
             traceback.print_exc()
