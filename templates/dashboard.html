@@ -93,95 +93,16 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- First column (articles) -->
                             <div class="space-y-4">
-                                {% for article in articles[:3] %}
-                                <div class="news-card p-4 rounded-lg border border-gray-100" 
-                                     data-categories="{{ article.categories|default('policy,innovation,business,climate') }}">
-                                    <div class="flex flex-wrap gap-2 mb-2">
-                                        {% for category in article.categories|default('innovation,business')|split(',') %}
-                                        <span class="category-badge category-{{ category }}">
-                                            {{ {'policy': 'Policy', 'innovation': 'Innovation', 'business': 'Business', 'climate': 'Climate'}[category] }}
-                                        </span>
-                                        {% endfor %}
-                                        <span class="ml-auto text-xs text-gray-500">{{ article.date }}</span>
-                                    </div>
-                                    
-                                    <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                        <a href="{{ article.link }}" target="_blank" class="hover:text-primary-600">
-                                            {{ article.title }}
-                                        </a>
-                                    </h3>
-                                    
-                                    <p class="text-gray-600 mb-3">{{ article.summary }}</p>
-                                    
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                            {{ article.source }}
-                                        </span>
-                                        <a href="{{ article.link }}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                            Read more <i class="fas fa-arrow-right ml-1"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                {% endfor %}
+                                <!-- ARTICLES_COLUMN_1_PLACEHOLDER -->
                             </div>
                             
                             <!-- Second column (mix of podcasts and articles) -->
                             <div class="space-y-4">
                                 <!-- First two podcasts -->
-                                {% for podcast in podcasts[:2] %}
-                                <div class="news-card p-4 rounded-lg border border-gray-100">
-                                    <div class="mb-2 flex justify-between items-center">
-                                        <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                                            Podcast
-                                        </span>
-                                        <span class="text-xs text-gray-500">{{ podcast.release_date }}</span>
-                                    </div>
-                                    
-                                    <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                                        <a href="{{ podcast.url }}" target="_blank" class="hover:text-primary-600">
-                                            {{ podcast.title }}
-                                        </a>
-                                    </h3>
-                                    
-                                    <p class="text-sm text-gray-600 mb-3">{{ podcast.summary }}</p>
-                                    
-                                    <a href="{{ podcast.url }}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                                        <i class="fas fa-play mr-1"></i> Listen
-                                    </a>
-                                </div>
-                                {% endfor %}
+                                <!-- PODCASTS_COLUMN_1_PLACEHOLDER -->
                                 
                                 <!-- One more article -->
-                                {% if articles|length > 3 %}
-                                <div class="news-card p-4 rounded-lg border border-gray-100" 
-                                     data-categories="{{ articles[3].categories|default('policy,innovation,business,climate') }}">
-                                    <div class="flex flex-wrap gap-2 mb-2">
-                                        {% for category in articles[3].categories|default('innovation,business')|split(',') %}
-                                        <span class="category-badge category-{{ category }}">
-                                            {{ {'policy': 'Policy', 'innovation': 'Innovation', 'business': 'Business', 'climate': 'Climate'}[category] }}
-                                        </span>
-                                        {% endfor %}
-                                        <span class="ml-auto text-xs text-gray-500">{{ articles[3].date }}</span>
-                                    </div>
-                                    
-                                    <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                        <a href="{{ articles[3].link }}" target="_blank" class="hover:text-primary-600">
-                                            {{ articles[3].title }}
-                                        </a>
-                                    </h3>
-                                    
-                                    <p class="text-gray-600 mb-3">{{ articles[3].summary }}</p>
-                                    
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                            {{ articles[3].source }}
-                                        </span>
-                                        <a href="{{ articles[3].link }}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                            Read more <i class="fas fa-arrow-right ml-1"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                {% endif %}
+                                <!-- ARTICLE_COLUMN_2_PLACEHOLDER -->
                             </div>
                         </div>
                         
@@ -189,62 +110,12 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                             <!-- Third column (remaining articles) -->
                             <div>
-                                {% if articles|length > 4 %}
-                                <div class="news-card p-4 rounded-lg border border-gray-100" 
-                                     data-categories="{{ articles[4].categories|default('policy,innovation,business,climate') }}">
-                                    <div class="flex flex-wrap gap-2 mb-2">
-                                        {% for category in articles[4].categories|default('innovation,business')|split(',') %}
-                                        <span class="category-badge category-{{ category }}">
-                                            {{ {'policy': 'Policy', 'innovation': 'Innovation', 'business': 'Business', 'climate': 'Climate'}[category] }}
-                                        </span>
-                                        {% endfor %}
-                                        <span class="ml-auto text-xs text-gray-500">{{ articles[4].date }}</span>
-                                    </div>
-                                    
-                                    <h3 class="text-xl font-medium text-gray-900 mb-2 leading-tight">
-                                        <a href="{{ articles[4].link }}" target="_blank" class="hover:text-primary-600">
-                                            {{ articles[4].title }}
-                                        </a>
-                                    </h3>
-                                    
-                                    <p class="text-gray-600 mb-3">{{ articles[4].summary }}</p>
-                                    
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                                            {{ articles[4].source }}
-                                        </span>
-                                        <a href="{{ articles[4].link }}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                                            Read more <i class="fas fa-arrow-right ml-1"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                {% endif %}
+                                <!-- ARTICLE_COLUMN_3_PLACEHOLDER -->
                             </div>
                             
                             <!-- Fourth column (remaining podcasts) -->
                             <div>
-                                {% if podcasts|length > 2 %}
-                                <div class="news-card p-4 rounded-lg border border-gray-100">
-                                    <div class="mb-2 flex justify-between items-center">
-                                        <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-                                            Podcast
-                                        </span>
-                                        <span class="text-xs text-gray-500">{{ podcasts[2].release_date }}</span>
-                                    </div>
-                                    
-                                    <h3 class="text-lg font-medium text-gray-900 mb-2 leading-tight">
-                                        <a href="{{ podcasts[2].url }}" target="_blank" class="hover:text-primary-600">
-                                            {{ podcasts[2].title }}
-                                        </a>
-                                    </h3>
-                                    
-                                    <p class="text-sm text-gray-600 mb-3">{{ podcasts[2].summary }}</p>
-                                    
-                                    <a href="{{ podcasts[2].url }}" target="_blank" class="text-primary-600 hover:text-primary-800 text-sm font-medium flex items-center">
-                                        <i class="fas fa-play mr-1"></i> Listen
-                                    </a>
-                                </div>
-                                {% endif %}
+                                <!-- PODCASTS_COLUMN_2_PLACEHOLDER -->
                             </div>
                         </div>
                     </div>
