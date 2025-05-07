@@ -30,6 +30,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python -m nltk.downloader punkt stopwords
+          sudo apt-get update && sudo apt-get install -y ffmpeg
           
       - name: Run app to collect data
         env:
@@ -38,7 +39,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python main.py &
-          sleep 60  # Give it time to scrape content
+          sleep 300  # Increased sleep duration to 5 minutes
           pkill -f "python main.py" || true
           
       - name: Generate static site
