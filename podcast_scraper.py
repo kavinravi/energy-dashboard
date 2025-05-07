@@ -212,6 +212,8 @@ class PodcastScraper:
                     print(f"Audio downloaded to {temp_audio_filename}")
 
                     print("Starting transcription...")
+                    # Ensure API key is set if using OpenAI's API directly (Whisper model might use it implicitly)
+                    # openai.api_key = os.getenv("OPENAI_API_KEY") # Uncomment if direct API calls are made elsewhere for transcription
                     result = model.transcribe(temp_audio_filename)
                     transcript_text = result["text"]
                     print("Transcription complete.")
@@ -220,10 +222,12 @@ class PodcastScraper:
                     print(f"Temporary audio file {temp_audio_filename} removed.")
 
                 except requests.exceptions.RequestException as req_e:
-                    print(f"Error downloading audio for {entry.title}: {str(req_e)}")
+                    print(f"Error downloading audio for {entry.title if hasattr(entry, 'title') else 'Untitled'}: {str(req_e)}")
+                    traceback.print_exc() # Add traceback for download errors
                     transcript_text = "Audio download failed."
                 except Exception as e:
-                    print(f"Error during transcription for {entry.title}: {str(e)}")
+                    print(f"Error during transcription for {entry.title if hasattr(entry, 'title') else 'Untitled'}: {type(e).__name__} - {str(e)}")
+                    traceback.print_exc()  # This will print the full traceback
                     transcript_text = "Transcription failed."
                     if os.path.exists("temp_podcast_audio.m4a"):
                         os.remove("temp_podcast_audio.m4a")
