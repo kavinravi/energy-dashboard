@@ -54,14 +54,31 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Add all files that might have changed
-          git add index.html static/ data/*.json articles.json podcasts.json
+          # Show what files have been modified for debugging
+          echo "Files changed (git status):"
+          git status
+          
+          # Add ALL changed files instead of listing specific ones
+          git add .
           
           # Commit with a timestamp
           git commit -m "Update dashboard content [automated] $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
           
-          # Make sure we're working with the latest code
+          # Safer approach for pulling and pushing
+          # If there are any unstaged changes after the commit, stash them
+          if ! git diff --no-ext-diff --quiet; then
+            echo "Stashing unstaged changes before pull"
+            git stash
+          fi
+          
+          # Pull with rebase
           git pull --rebase origin master
           
           # Push changes
-          git push origin master 
+          git push origin master
+          
+          # Optionally restore stashed changes if there were any
+          if git stash list | grep -q "stash@{0}"; then
+            echo "Restoring stashed changes"
+            git stash pop || echo "Stash pop failed, but continuing"
+          fi
