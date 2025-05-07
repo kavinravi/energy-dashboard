@@ -55,7 +55,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           # Add all files that might have changed
-          git add index.html static/ data/*.json || true
+          git add index.html static/ data/*.json articles.json podcasts.json
           
           # Commit with a timestamp
           git commit -m "Update dashboard content [automated] $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
