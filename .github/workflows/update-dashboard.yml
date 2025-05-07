@@ -39,7 +39,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python main.py &
-          sleep 300  # Increased sleep duration to 5 minutes
+          sleep 1200  # Increased sleep duration to 20 minutes
           pkill -f "python main.py" || true
           
       - name: Generate static site

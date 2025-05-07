@@ -405,6 +405,10 @@ class PodcastScraper:
             llm_summary = completion.choices[0].message.content.strip()
             print("LLM summary generated.")
             return llm_summary
+        except openai.RateLimitError as rle:
+            print(f"OpenAI API rate limit hit during summarization: {str(rle)}")
+            return "LLM summary failed due to rate limit."
         except Exception as e:
             print(f"Error during LLM summarization: {str(e)}")
+            traceback.print_exc() # Add traceback for other LLM errors
             return "LLM summary generation failed." 
