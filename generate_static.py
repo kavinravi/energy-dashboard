@@ -8,6 +8,7 @@ import json
 import re
 from datetime import datetime
 import shutil
+import pytz  # Add pytz for timezone handling
 
 # Create static output directory
 os.makedirs('static_site', exist_ok=True)
@@ -47,8 +48,10 @@ try:
         content = f.read()
     
     # Replace the static template variables
-    content = content.replace('{{ last_updated }}', datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    content = content.replace('{{ now.year }}', str(datetime.now().year))
+    pacific_tz = pytz.timezone('America/Los_Angeles')
+    current_time_pst = datetime.now(pytz.utc).astimezone(pacific_tz)
+    content = content.replace('{{ last_updated }}', current_time_pst.strftime("%Y-%m-%d %H:%M:%S %Z"))
+    content = content.replace('{{ now.year }}', str(current_time_pst.year))
 
     # Helper function to generate a single article card HTML
     def generate_article_card(article):

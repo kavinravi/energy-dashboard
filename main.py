@@ -9,6 +9,7 @@ import traceback
 import logging
 from logging.handlers import RotatingFileHandler
 import re
+import pytz
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -179,12 +180,16 @@ def dashboard():
         # Ensure articles have categories
         articles = categorize_articles(articles)
         
+        # Get current time in Pacific timezone
+        pacific_tz = pytz.timezone('America/Los_Angeles')
+        current_time_pst = datetime.now(pytz.utc).astimezone(pacific_tz)
+        
         return render_template(
             'dashboard.html',
             articles=articles,
             podcasts=podcasts,
-            last_updated=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            now=datetime.now()
+            last_updated=current_time_pst.strftime("%Y-%m-%d %H:%M:%S %Z"),
+            now=current_time_pst
         )
     except Exception as e:
         logger.error(f"Error rendering dashboard: {str(e)}")
