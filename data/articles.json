@@ -1,29 +1,20 @@
 [
   {
-    "title": "The State of Energy Affordability",
-    "link": "https://www.oracle.com/utilities",
-    "summary": "Deliver outstanding customer experiences, improve energy efficiency, and manage networks and assets so you can deliver essential services to your communities every day. Accelerate your energy transition to net-zero carbon emissions by combining Oracle Cloud technology with Accenture\u2019s deep industry experience. Extend visibility to customer-owned grid edge distributed energy resources. Learn how Oracle\u2019s Data Management and AI Services can help IT professionals apply spatial analytics to vegetation management, resulting in businesses being able to reduce revenue loss from power outages and take better predictive measures.",
+    "title": "Balancing Act: Delivering Resiliency and Decarbonization with Integrated Resources",
+    "link": "https://www.dnv.com/",
+    "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:45.884933",
-    "categories": "innovation,business,climate"
-  },
-  {
-    "title": "Canary Live Bay Area",
-    "link": "https://canarylivebayarea2025.eventbrite.com",
-    "summary": "David Hochschild was appointed chair of the California Energy Commission by Governor Gavin Newsom in February 2019. For his work to advance clean energy, Hochschild was awarded the Sierra Club's Trailblazer Award, the American Lung Association's Clean Air Hero Award, and the U.S. Department of Energy's Million Solar Roof True Champion Award. His areas of expertise include renewable energy, smart grid, distributed energy resources, energy storage, demand response, and electric vehicles. Hydrostor\u2019s Willow Rock Energy Storage Center has become a symbol of how to balance environmental integrity, economic opportunity, and community trust.",
-    "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:47.899545",
-    "categories": "policy,innovation,business,climate"
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:30.437006",
+    "categories": "climate"
   },
   {
     "title": "Data Center Impacts in the West: Policy Solutions for Water and Energy Use",
     "link": "https://energy.canarymedia.com/data-center-impacts-in-the-west",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:48.041618",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:30.819391",
     "categories": "policy,innovation"
   },
   {
@@ -31,8 +22,8 @@
     "link": "https://energy.canarymedia.com/rmi-scaling-technological-ghg-removal-v2",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:48.169697",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:31.002332",
     "categories": "policy,climate"
   },
   {
@@ -40,8 +31,8 @@
     "link": "https://energy.canarymedia.com/httpsrmi-breaking-barriers-cdr-v2",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:48.321127",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:31.346469",
     "categories": "climate"
   },
   {
@@ -49,8 +40,8 @@
     "link": "https://www.canarymedia.com/articles/geothermal/colorado-coal-miner-renewable-energy-drilling-business",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:49.034290",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:32.083574",
     "categories": "climate"
   },
   {
@@ -58,26 +49,26 @@
     "link": "https://www.canarymedia.com/articles/batteries/pila-plug-in-backup-power-renters-homes",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:50.044466",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:33.062940",
     "categories": "innovation"
   },
   {
-    "title": "Europe\u2019s flagship green-steel project gets a financial lifeline",
-    "link": "https://www.canarymedia.com/articles/green-steel/europes-flagship-green-steel-project-gets-a-financial-lifeline-stegra-hy24",
+    "title": "Puerto Rico\u2019s energy future: distributed solar or centralized grid?",
+    "link": "https://www.canarymedia.com/articles/distributed-energy-resources/puerto-ricos-energy-future-distributed-solar-or-centralized-grid",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:51.050247",
-    "categories": "business"
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:33.776313",
+    "categories": "innovation"
   },
   {
     "title": "Chart: Batteries are set to surge onto the US\u00a0grid",
     "link": "https://www.canarymedia.com/articles/batteries/us-energy-storage-growth-2030-bloombergnef",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:51.735188",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:34.777222",
     "categories": "innovation"
   },
   {
@@ -85,8 +76,26 @@
     "link": "https://www.canarymedia.com/articles/electric-vehicles/ev-record-sales-tax-credit-end-trump",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:52.389502",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:35.401255",
+    "categories": "innovation,business"
+  },
+  {
+    "title": "Europe\u2019s flagship green-steel project gets a financial lifeline",
+    "link": "https://www.canarymedia.com/articles/green-steel/europes-flagship-green-steel-project-gets-a-financial-lifeline-stegra-hy24",
+    "summary": "",
+    "source": "Canary Media",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:36.702241",
+    "categories": "business"
+  },
+  {
+    "title": "What\u2019s the best time to buy an EV? Right now.",
+    "link": "https://www.canarymedia.com/articles/electric-vehicles/buy-lease-ev-tax-credit",
+    "summary": "",
+    "source": "Canary Media",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:38.014366",
     "categories": "innovation,business"
   },
   {
@@ -94,35 +103,35 @@
     "link": "https://www.canarymedia.com/articles/offshore-wind/california-turbines-bat-research-trump-funding-cuts",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:53.723047",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:39.324639",
     "categories": "innovation"
   },
   {
-    "title": "What\u2019s the best time to buy an EV? Right now.",
-    "link": "https://www.canarymedia.com/articles/electric-vehicles/buy-lease-ev-tax-credit",
+    "title": "Energy bills are rising nationwide. In Georgia, they\u2019re on the ballot.",
+    "link": "https://www.canarymedia.com/articles/utilities/georgia-regulator-psc-elections-energy-affordability",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:55.062056",
-    "categories": "innovation,business"
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:40.309143",
+    "categories": "policy"
   },
   {
-    "title": "In a\u00a0boost for offshore wind, New Jersey elects Mikie Sherrill",
+    "title": "NYC\u2019s next mayor Zohran Mamdani has a\u00a0big climate policy to-do\u00a0list",
+    "link": "https://www.canarymedia.com/articles/policy-regulation/zohran-mamdani-clean-energy-building-decarbonization",
+    "summary": "",
+    "source": "Canary Media",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:40.610512",
+    "categories": "policy,climate"
+  },
+  {
+    "title": "In a boost for offshore wind, New Jersey elects Mikie Sherrill",
     "link": "https://www.canarymedia.com/articles/offshore-wind/mikie-sherrill-new-jersey-governor-renewables",
     "summary": "",
     "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:41:57.708982",
-    "categories": "innovation,business"
-  },
-  {
-    "title": "The case for optimism in America\u2019s energy transition",
-    "link": "https://www.canarymedia.com/articles/sponsored/the-case-for-optimism-in-americas-energy-transition",
-    "summary": "",
-    "source": "Canary Media",
-    "date": "2025-11-06",
-    "timestamp": "2025-11-06T01:42:01.909637",
+    "date": "2025-11-07",
+    "timestamp": "2025-11-07T01:41:40.930024",
     "categories": "innovation,business"
   }
 ]
