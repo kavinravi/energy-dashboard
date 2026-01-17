@@ -4,8 +4,8 @@
     "link": "https://energy.canarymedia.com/dnv-energy-transition-outlook-north-america-2025",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:15.497993",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:32.220804",
     "categories": "innovation,business"
   },
   {
@@ -13,8 +13,8 @@
     "link": "https://energy.canarymedia.com/rmi-scaling-technological-ghg-removal-v2",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:15.820940",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:32.400423",
     "categories": "policy,climate"
   },
   {
@@ -22,8 +22,8 @@
     "link": "https://energy.canarymedia.com/httpsrmi-breaking-barriers-cdr-v2",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:16.048405",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:32.515652",
     "categories": "climate"
   },
   {
@@ -31,8 +31,8 @@
     "link": "https://www.canarymedia.com/articles/offshore-wind/man-behind-the-fall-of-offshore-wind",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:16.429929",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:32.845859",
     "categories": "innovation,business"
   },
   {
@@ -40,8 +40,8 @@
     "link": "https://www.canarymedia.com/articles/clean-energy/can-the-war-on-coal-be-won",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:16.860265",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:33.225118",
     "categories": "climate"
   },
   {
@@ -49,8 +49,8 @@
     "link": "https://www.canarymedia.com/articles/just-transition/greece-coal-to-solar-transition",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:17.800182",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:33.592119",
     "categories": "climate"
   },
   {
@@ -58,8 +58,8 @@
     "link": "https://www.canarymedia.com/articles/clean-energy/richland-ohio-wind-solar-ban-vote",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:18.271322",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:33.911666",
     "categories": "innovation,business"
   },
   {
@@ -67,35 +67,71 @@
     "link": "https://www.canarymedia.com/articles/geothermal/colorado-coal-town-digs-geothermal",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:18.575775",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:34.261000",
     "categories": "climate"
+  },
+  {
+    "title": "Why is Duke Energy retreating from a major pumped-hydro expansion?",
+    "link": "https://www.canarymedia.com/articles/hydropower/duke-energy-retreating-major-pumped-hydro-expansion",
+    "summary": "",
+    "source": "Canary Media",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:34.627941",
+    "categories": "innovation,business"
+  },
+  {
+    "title": "After a white town rejected a data center, developers eyed a Black area",
+    "link": "https://www.canarymedia.com/articles/data-centers/data-center-developers-eye-black-area",
+    "summary": "",
+    "source": "Canary Media",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:34.949349",
+    "categories": "innovation,business"
   },
   {
     "title": "Cuts to manufactured-home efficiency rules would hit Southeast hard",
     "link": "https://www.canarymedia.com/articles/energy-efficiency/cuts-to-mobile-home-efficiency-standards-southeast",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:19.620487",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:35.257558",
     "categories": "innovation"
+  },
+  {
+    "title": "Illinois\u2019 booming solar sector entices young job seekers",
+    "link": "https://www.canarymedia.com/articles/solar/illinois-young-people-jobs-renewable-energy",
+    "summary": "",
+    "source": "Canary Media",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:35.571873",
+    "categories": "innovation,business"
   },
   {
     "title": "Judge blocks Trump\u2019s latest pause on a major offshore wind farm",
     "link": "https://www.canarymedia.com/articles/offshore-wind/judge-blocks-trump-revolution-orsted-order",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:19.920720",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:35.944202",
     "categories": "innovation,business"
+  },
+  {
+    "title": "US carbon emissions rose in 2025 as coal produced more power",
+    "link": "https://www.canarymedia.com/articles/emissions-reduction/us-carbon-emissions-rose-coal",
+    "summary": "",
+    "source": "Canary Media",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:36.264320",
+    "categories": "climate"
   },
   {
     "title": "2025 wasn't a great year for green steel ambitions. What happens now?",
     "link": "https://www.canarymedia.com/articles/green-steel/2025-not-great-year-for-green-steel",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:21.750437",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:38.261750",
     "categories": "innovation,business"
   },
   {
@@ -103,8 +139,8 @@
     "link": "https://www.canarymedia.com/articles/clean-energy/energy-legislation-takes-center-stage-virginia",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:22.168358",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:38.589490",
     "categories": "climate"
   },
   {
@@ -112,35 +148,8 @@
     "link": "https://www.canarymedia.com/articles/fossil-fuels/epa-free-pass-toxic-ash-disposal",
     "summary": "",
     "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:23.825801",
+    "date": "2026-01-17",
+    "timestamp": "2026-01-17T01:45:39.271925",
     "categories": "policy,climate"
-  },
-  {
-    "title": "Offshore wind had a terrible 2025. What can be learned?",
-    "link": "https://www.canarymedia.com/articles/offshore-wind/offshore-wind-lessons-from-2025",
-    "summary": "",
-    "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:25.359144",
-    "categories": "innovation,business"
-  },
-  {
-    "title": "Ohio utility corruption defendants to SCOTUS: Bribes are free speech",
-    "link": "https://www.canarymedia.com/articles/utilities/ohio-utility-corruption-defendants-appeal-scotus",
-    "summary": "",
-    "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:25.645738",
-    "categories": "innovation,business"
-  },
-  {
-    "title": "PJM needs flexible data centers. Here\u2019s a blueprint.",
-    "link": "https://www.canarymedia.com/articles/data-centers/pjm-needs-flexible-data-centers",
-    "summary": "",
-    "source": "Canary Media",
-    "date": "2026-01-16",
-    "timestamp": "2026-01-16T01:51:25.993142",
-    "categories": "innovation,business"
   }
 ]
